@@ -1,6 +1,7 @@
 projekt-mastermind
+
+RED = 0, MAGENTA = 1, YELLOW = 2, GREEN = 3, BLUE = 4, CYAN = 5, WHITE = 6, BLACK = 7;
 ==================
-hopp hopp, haben nur 3 wochen zeit für das super mega geiles spiel! :D
 
 ==================
 Jeder macht bitte seinen eigenen TestTreiber für die jeweiligen Zwecke :)
@@ -18,7 +19,6 @@ Folgendes ist noch zu besprechen bzw darauf zu einigen:
 
 ~Neil
 =================
-
 Grobe Vorgaben werden/wurden von mir erstellt.
 Wenn jemand glaubt, eine Methode anders zu schreiben oder ganz andere Methoden
 hinzuzufügen, soll er dies tun und das Team drüer unterrichten.
@@ -29,3 +29,5 @@ Dann können andere auch sehen, was ihr so testet :P
 Upload gehen über Commit + PUSH  (Push ist irgendwie wichtig.)
 
 ~Neil
+==================
+hopp hopp, haben nur 3 wochen zeit für das super mega geiles spiel! :D

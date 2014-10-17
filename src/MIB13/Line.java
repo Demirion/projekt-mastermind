@@ -1,5 +1,7 @@
 package MIB13;
 
+import java.util.Vector;
+
 /**
  * Created by niiru on 17.10.14.
  * <p/>
@@ -7,33 +9,50 @@ package MIB13;
  * Eine Line wird zum Spielstart initialisiert, die restlichen vom Benutzer gefüllt.
  */
 public class Line {
-    Ball balls[];
-    int lineNumber; //Wichtig??
-    static int lineID = 0;
+    //private Ball balls[] = new Ball[4];
+    private Vector<Ball> balls = new Vector<Ball>(4);
+    protected int lineNumber; //Unwichtig??
+    private static int lineID = 0;
 
     public Line() {
+
+        lineNumber = lineID++;
     }
 
     ; //Standard Constructor
 
     public Line(Ball a, Ball b, Ball c, Ball d) {
-        balls[0] = a;
-        balls[1] = b;
-        balls[2] = c;
-        balls[3] = d;
+        addBall(a);
+        addBall(b);
+        addBall(c);
+        addBall(d);
         lineNumber = lineID++;
     }
 
-    public Ball[] getBalls() {
-        return balls;
+    public void addBall(Ball b) {
+        if (balls.size() < 4) {
+            balls.add(b);
+        } else {
+            System.out.println("Vektor voll.");
+        }
     }
+
+    public void removeLastBall() {
+        if (balls.size() > 0)
+            balls.remove(balls.size());
+        else System.out.println("Vektor bereits leer.");
+    }
+
+    public Vector<Ball> getBalls() {
+        return balls;
+    } //Gibt das Array zurück. Unnötig?
 
     public int getLineNumber() {
         return lineNumber;
     }
 
     public Ball getBall(int i) {
-        return balls[i];
+        return balls.elementAt(i);
     }
 
 
