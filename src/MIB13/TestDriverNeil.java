@@ -10,6 +10,5 @@ public class TestDriverNeil {
         System.out.println("Farbnummer: " + ball.getColor());
         System.out.println("Farbe: " + ball.getColorString());
         System.out.println("Bild Höhe, Weite: " + ball.getImg().getHeight() + ", " + ball.getImg().getWidth());
-        System.out.println("JOwsefwjje");
     }
 }

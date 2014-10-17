@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Ball {
     //public enum colorEnum {red, green, yellow, blue, orange, cyan};
     // Farben werden noch abgesprochen
-    public final static int RED = 0, GREEN = 1; //usw.
+    public final static int RED = 0, MAGENTA = 1, YELLOW = 2, GREEN = 3, BLUE = 4, CYAN = 5, WHITE = 6, BLACK = 7;
     private BufferedImage img;
     private int color;
     private String colorString;

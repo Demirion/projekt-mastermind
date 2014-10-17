@@ -17,3 +17,15 @@ Folgendes ist noch zu besprechen bzw darauf zu einigen:
 *Easter Eggs? ^.^
 
 ~Neil
+=================
+
+Grobe Vorgaben werden/wurden von mir erstellt.
+Wenn jemand glaubt, eine Methode anders zu schreiben oder ganz andere Methoden
+hinzuzufügen, soll er dies tun und das Team drüer unterrichten.
+
+Übrigens: Bitte jeder eine Klasse TestDriverNAME erzeugen und damit jeweils Arbeiten/Debuggen.
+Dann können andere auch sehen, was ihr so testet :P
+
+Upload gehen über Commit + PUSH  (Push ist irgendwie wichtig.)
+
+~Neil
