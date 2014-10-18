@@ -37,3 +37,8 @@ Erik 18.10.2014
 Freue mich!
 Sehr schöner Entwurf, Neil. Alles gut übersichtlich gestaltet. Thx
 Ich werde mich heute nachmittag mal an die GUI setzen.
+
+===================================
+@ GRAFIKER
+ich brauche bitte die bilder von den bällen...damit ich methode ball.getImg() nutzen kann
+mfg erik
