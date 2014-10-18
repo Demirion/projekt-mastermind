@@ -31,3 +31,9 @@ Upload gehen über Commit + PUSH  (Push ist irgendwie wichtig.)
 ~Neil
 ==================
 hopp hopp, haben nur 3 wochen zeit für das super mega geiles spiel! :D
+
+Erik 18.10.2014
+====================================
+Freue mich!
+Sehr schöner Entwurf, Neil. Alles gut übersichtlich gestaltet. Thx
+Ich werde mich heute nachmittag mal an die GUI setzen.
