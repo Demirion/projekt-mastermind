@@ -6,9 +6,12 @@ package MIB13;
  * In dieser Klasse werden die Spiellogiken verwaltet.
  */
 public class GameHelper {
+
     private boolean multiColors = false; //Option zum einstellen der Mehrfachfarbauswahl
     private boolean gameIsRunning = false;
     private int round = 0;
+    private MasterLine masterLine;
+    private int sticks[] = new int[2]; //[0] = black; [1] = white;
 
     public boolean gameIsRunning() {
         return gameIsRunning;
@@ -22,11 +25,20 @@ public class GameHelper {
         return round;
     }
 
+    public void setMultiColors(boolean multiColors) {
+        /**
+         * Diese wird von dem Actionlistener der ComboBox aufgerufen!!
+         */
+        this.multiColors = multiColors;
+    }
+
     public void init() {
         /**
          * Initialisierung.
          * TODO Alle Werte auf 0 bzw false setzen.
          */
+        round = 0;
+        masterLine = null;
 
     }
 
@@ -37,27 +49,43 @@ public class GameHelper {
          * eine MasterLine mit dem Argument multiColors erstellt werden.
          */
         init();
+        masterLine = new MasterLine(isMultiColors());
         gameIsRunning = true;
 
     }
 
-    public void checkLine() {
+    public int[] checkLine(MasterLine masterLine, Line line) { //Fertig(?)
         /**
          * Methode zum vergleichen der derzeitigen Zeile mit der MasterLine.
-         * Bei gleichheit wird die Methode gameWon aufgerufen.
+         * Bei gleichheit (blackSticks == 4) wird die Methode gameWon aufgerufen.
+         *
+         * Gibt int Array mit anzahl der Schwarzen und Weißen Sticks zurück.
          */
         if (gameIsRunning) {
+            sticks[0] = sticks[1] = 0;
 
-            //blah blah
+            for (int i = 0; i < masterLine.getBalls().size(); i++) {
+                if (masterLine.getBall(i).getColor() == line.getBall(i).getColor()){
+                    sticks[0]++;
+                }   else {
+                    for (int j = 0; j < masterLine.getBalls().size(); j++) {
+                        if (masterLine.getBall(i).getColor() == line.getBall(j).getColor()){
+                            sticks[1]++;
+                        }
+                    }
+                }
+            }
+            if (sticks[0]==4) gameWon();
             round++;
         }
-
+        return sticks;
     }
 
     public void gameWon() {
         /**
          * Wenn das Spiel gewonnen ist, werden "Highscore" berechnet und das Spiel auf nicht laufend gesetzt.
          */
+        System.out.println("Gewonnen!"); //Debug
 
         gameIsRunning = false;
     }
