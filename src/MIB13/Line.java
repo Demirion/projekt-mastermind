@@ -15,11 +15,8 @@ public class Line {
     private static int lineID = 0;
 
     public Line() {
-
         lineNumber = lineID++;
-    }
-
-    ; //Standard Constructor
+    }; //Standard Constructor
 
     public Line(Ball a, Ball b, Ball c, Ball d) {
         addBall(a);
