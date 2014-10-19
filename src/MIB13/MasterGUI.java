@@ -17,8 +17,12 @@ public class MasterGUI extends gameGUISKIZZE {
     int derzeitigeRunde = 3;
     JButton newGameButton, ballButton[];
     JPanel  lineA = new JPanel();
+
+    JPanel [] panelResultDisplay = new JPanel [10];
+    JLabel [] labelResultDisplay = new JLabel [4];
     JLabel ballLabel, numberLabel;
     ImageIcon icon = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/greyBall.png");
+    ImageIcon pin = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pin.png");
 
     public Ball ballRed = new Ball(0);
     public Ball ballGreen = new Ball(1);
@@ -48,6 +52,8 @@ public class MasterGUI extends gameGUISKIZZE {
         //Am besten wäre es wohl ein Gitter zu erstellen, welches wie Folgt aufgebaut ist:
         JFrame frame = new JFrame();
         JPanel backGround = new JPanel();
+        JPanel controlPanel = new JPanel();
+        JPanel panelFrameControl = new JPanel(new BorderLayout());
         JPanel grid[] = new JPanel[10];
         for (int i = 0; i < 10; i++) {
             grid[i] = new JPanel();
@@ -63,27 +69,35 @@ public class MasterGUI extends gameGUISKIZZE {
         //LayoutManager
         lineA.setLayout(new FlowLayout());
         backGround.setLayout(new GridLayout(10, 1));
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
 
         //Label erstellen
         for (int j = 0; j < grid.length ;j++) {
             numberLabel = new JLabel();
             numberLabel.setSize(40,40);
-            numberLabel.setText(String.valueOf(j+1));
+            numberLabel.setText(String.valueOf(j + 1));
+            panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,5));
+
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
                 ballLabel = new JLabel(icon);
                 ballLabel.setSize(40, 40);
-                //lineA.add(ballLabel);
+                labelResultDisplay[i] = new JLabel(pin);
+                //labelResultDisplay[i].setText("o");
+                labelResultDisplay[i].setSize(5, 5);
                 grid[j].add(ballLabel);
+                panelResultDisplay[j].add(labelResultDisplay[i]);
+
             }
+            grid[j].add(panelResultDisplay[j]);
             backGround.add(grid[j]);
         }
 
         //Neues Game Button
         newGameButton = new JButton("Neues Spiel");
         newGameButton.setSize(100,50);
-        newGameButton.setLocation(300,10);
-        frame.add(newGameButton);
+        //newGameButton.setLocation(300,10);
+        controlPanel.add(newGameButton);
 
         //Button für Ball erzeugen
         ballButton = new JButton[8];
@@ -91,7 +105,7 @@ public class MasterGUI extends gameGUISKIZZE {
             ballButton[i] = new JButton(icon);
             ballButton[i].setSize(50,50);
             ballButton[i].setLocation(325,60 + i * 50);
-            frame.add(ballButton[i]);
+            controlPanel.add(ballButton[i]);
         }
 
         //TODO ballbutton bilder zuweisen
@@ -119,8 +133,11 @@ public class MasterGUI extends gameGUISKIZZE {
                 //ggf. andere Methoden zum zurücksetzen der Bilder etc.
             }
         });
+        panelFrameControl.add(backGround, BorderLayout.WEST);
+        panelFrameControl.add(controlPanel, BorderLayout.EAST);
+        //frame.add(backGround);
+        frame.add(panelFrameControl);
 
-        frame.add(backGround);
         frame.setVisible(true);
         //======================================
         //Beispiel für das Auswählen einer Kugel
