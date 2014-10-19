@@ -14,19 +14,21 @@ import static javax.swing.BoxLayout.*;
 public class MasterGUI extends gameGUISKIZZE {
     GameHelper gameHelper;
     Line lineArray[] = new Line[10];
-    int derzeitigeRunde = 3;
-    JButton newGameButton, ballButton[];
+    int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
+    JButton newGameButton, ballButton[], readTippButton;
     JPanel  lineA = new JPanel();
 
     JPanel [] panelResultDisplay = new JPanel [10];
     JLabel [] labelResultDisplay = new JLabel [4];
-    JLabel ballLabel, numberLabel;
+    JLabel  numberLabel, timeLabel;
+    JLabel [][]ballLabel = new JLabel[10][4];
     ImageIcon icon = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/greyBall.png");
     ImageIcon pin = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pin.png");
+    ImageIcon icontest = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/magenta.png");
 
     public Ball ballRed = new Ball(0);
     public Ball ballGreen = new Ball(1);
-    public Ball ballMangenta = new Ball(2);
+    public Ball ballMagenta = new Ball(2);
     public Ball ballYellow = new Ball(3);
     public Ball ballCyan = new Ball(4);
     public Ball ballBlue = new Ball(5);
@@ -36,13 +38,14 @@ public class MasterGUI extends gameGUISKIZZE {
     /*
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
-    ImageIcon iconMangenta = new ImageIcon(ballMangenta.getImg());
+    ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
     ImageIcon iconYellow = new ImageIcon(ballYellow.getImg());
     ImageIcon iconCyan = new ImageIcon(ballCyan.getImg());
     ImageIcon iconBlue = new ImageIcon(ballBlue.getImg());
     ImageIcon iconWhite = new ImageIcon(ballWhite.getImg());
     ImageIcon iconBlack = new ImageIcon(ballBlack.getImg());
     */
+
 
     public MasterGUI(){
         Init();
@@ -76,16 +79,16 @@ public class MasterGUI extends gameGUISKIZZE {
             numberLabel = new JLabel();
             numberLabel.setSize(40,40);
             numberLabel.setText(String.valueOf(j + 1));
-            panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,5));
+            panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,2));
 
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
-                ballLabel = new JLabel(icon);
-                ballLabel.setSize(40, 40);
+                ballLabel[j][i] = new JLabel(icon);
+                ballLabel[j][i].setSize(40, 40);
                 labelResultDisplay[i] = new JLabel(pin);
                 //labelResultDisplay[i].setText("o");
                 labelResultDisplay[i].setSize(5, 5);
-                grid[j].add(ballLabel);
+                grid[j].add(ballLabel[j][i]);
                 panelResultDisplay[j].add(labelResultDisplay[i]);
 
             }
@@ -95,22 +98,44 @@ public class MasterGUI extends gameGUISKIZZE {
 
         //Neues Game Button
         newGameButton = new JButton("Neues Spiel");
-        newGameButton.setSize(100,50);
+        newGameButton.setSize(300,50);
         //newGameButton.setLocation(300,10);
         controlPanel.add(newGameButton);
+
+        //Label für Zeit
+        timeLabel = new JLabel("Zeit");
+        timeLabel.setSize(100,100);
+        controlPanel.add(timeLabel);
 
         //Button für Ball erzeugen
         ballButton = new JButton[8];
         for (int i = 0; i < ballButton.length; i++){
             ballButton[i] = new JButton(icon);
             ballButton[i].setSize(50,50);
+            ballButton[i].setBackground(null);
+            //ballButton[i].setBorder(null);
+            ballButton[i].setBorderPainted(false);
             ballButton[i].setLocation(325,60 + i * 50);
             controlPanel.add(ballButton[i]);
         }
+        //ballButton[0].setIcon(ballMagenta.getImg());
+        ballButton[0].setIcon(icontest);
+
+        //Button um Tipp abzugeben
+        readTippButton = new JButton("Tipp abgeben");
+        readTippButton.setSize(100,50);
+        controlPanel.add(readTippButton);
+
+        panelFrameControl.add(backGround, BorderLayout.WEST);
+        panelFrameControl.add(controlPanel, BorderLayout.EAST);
+        frame.add(panelFrameControl);
+        frame.setVisible(true);
 
         //TODO ballbutton bilder zuweisen
 
         //TODO label für die Anzeige der Richtigen hinzufügen
+
+        //TODO reihenfolge zahlen umkehren
         //===================================
 
         gameHelper = new GameHelper();
@@ -133,12 +158,15 @@ public class MasterGUI extends gameGUISKIZZE {
                 //ggf. andere Methoden zum zurücksetzen der Bilder etc.
             }
         });
-        panelFrameControl.add(backGround, BorderLayout.WEST);
-        panelFrameControl.add(controlPanel, BorderLayout.EAST);
-        //frame.add(backGround);
-        frame.add(panelFrameControl);
 
-        frame.setVisible(true);
+        ballButton[0].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconRed);
+                ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(icontest);
+                anzahlFarbWahlen++;
+            }
+        });
         //======================================
         //Beispiel für das Auswählen einer Kugel
 
