@@ -74,7 +74,7 @@ public class MasterLine extends Line {
         int random = generator.nextInt(7);
 
 
-        return random; //random
+        return random;
     }
 
 }
