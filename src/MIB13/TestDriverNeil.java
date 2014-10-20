@@ -58,18 +58,22 @@ public class TestDriverNeil {
         Line one = new Line(red, blue, white, cyan);
         Line two = new Line(red, green, cyan, magenta);
         Line three = new Line(white, red, yellow, blue);
-        Line four = new Line(red, cyan, blue, magenta);
+        Line four = new Line(red, cyan, yellow, magenta);
 
         lineArray[0] = one;
         lineArray[1] = two;
         lineArray[2] = three;
         lineArray[3] = four;
 
-        int help[];
-        help = helper.getHelp(winLine, lineArray); //Red, Cyan, Black, Blue
+        String help;
+        //help = helper.getHelp(winLine, lineArray[0]); //Red, Cyan, Black, Blue
         for (int i = 0; i < lineArray.length; i++) {
-            System.out.println(help[i]);
+            System.out.println("Blacks für die Line " + i + ": " + helper.checkLine(winLine, lineArray[i])[0]);
+            System.out.println("Whites für die Line " + i + ": " + helper.checkLine(winLine, lineArray[i])[1]);
+            System.out.println(helper.getHelp(winLine, lineArray[i]));
+            System.out.println();
         }
+
 
         //Gui angucken :)
         //MasterGUI gui = new MasterGUI();

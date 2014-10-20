@@ -1,5 +1,7 @@
 package MIB13;
 
+import java.util.Random;
+
 /**
  * Created by niiru on 17.10.14.
  * <p/>
@@ -8,6 +10,7 @@ package MIB13;
  * Farben doppelt vorkommen dürfen.
  */
 public class MasterLine extends Line {
+    Random random = new Random();
 
     public MasterLine(boolean multiColors) {
 
@@ -30,6 +33,8 @@ public class MasterLine extends Line {
          * und dem Balls[] hinzugefügt werden.
          */
 
+        //random.nextInt(getBalls().size());
+
     }
 
     private void createSimpleLine() {
@@ -43,17 +48,9 @@ public class MasterLine extends Line {
          * und dem Balls[] hinzugefügt werden.
          */
 
+        //random.nextInt(getBalls().size());
+
     }
 
-    private int randomNumberGenerator() {
-        /**
-         * Es soll nur eine Zufällige Zahl generiert werden.
-         * Zahlenraum 0 - n für n = Anzahl der Farben-1
-         */
-        int random;
-
-
-        return 0; //random
-    }
 
 }

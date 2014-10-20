@@ -1,5 +1,8 @@
 package MIB13;
 
+import java.util.Random;
+import java.util.Vector;
+
 /**
  * Created by niiru on 17.10.14.
  * <p/>
@@ -8,7 +11,7 @@ package MIB13;
 public class GameHelper {
 
     private boolean multiColors = false; //Option zum einstellen der Mehrfachfarbauswahl
-    private boolean gameIsRunning = false;
+    private boolean gameIsRunning = true; //TODO Auf false setzen!!
     private int round = 0;
     private MasterLine masterLine;
     private int sticks[] = new int[2]; //[0] = black; [1] = white;
@@ -29,7 +32,7 @@ public class GameHelper {
 
     public void setMultiColors(boolean multiColors) {
         /**
-         * Diese wird von dem Actionlistener der ComboBox aufgerufen!!
+         * Diese wird von dem Actionlistener der CheckBox aufgerufen!!
          */
         this.multiColors = multiColors;
     }
@@ -92,24 +95,54 @@ public class GameHelper {
         gameIsRunning = false;
     }
 
-    public int[] getHelp(MasterLine masterLine, Line currentLine) {
+    public String getHelp(MasterLine masterLine, Line currentLine) {
         /**
          * Wenn der Spieler Hilfe benötigt, soll ihm mit dieser Funktion ein Tipp gegeben werden.
          * Dazu überprüft diese Funktion
          */
         int counter[] = new int[masterLine.getBalls().size()]; //für jede SPALTE
-        int linesWithBlacks[] = new int[lineArray[0].getBalls().size()]; //die Spalten selbst
+        //int linesWithBlacks[] = new int[lineArray[0].getBalls().size()]; //die Spalten selbst
 
-        for (int i = 0; i < lineArray.length; i++) {
-            for (int j = 0; j < masterLine.getBalls().size(); j++) {
-                if (masterLine.getBall(j).getColor() == lineArray[i].getBall(j).getColor()) {
-                    counter[i]++;
-                    if (counter[i] > 0) {
-                        linesWithBlacks[i] = counter[i];
-                    }
+        String retString = "";
+        int blackWhites[]; //sticks, nur halt für diese Funktion
+        blackWhites = checkLine(masterLine, currentLine);
+
+        if (blackWhites[1] == 0) {
+            //0 Weiße
+            return "Keine der Farben passt. Schließe diese Kategorisch aus!";
+        }
+        if (blackWhites[1] == 1) {
+            //1 Weißer
+            retString = "Probier es nochmal ;)";
+        }
+        if (blackWhites[1] > 1) {
+            //2+ Weiße
+            Vector<Ball> tempLine = (Vector<Ball>) masterLine.getBalls().clone();
+            int position = 0;
+            Random random = new Random();
+            int randomInt = random.nextInt(blackWhites[1]);
+
+            for (int i = 0; i < masterLine.getBalls().size(); i++) {
+                if (masterLine.getBall(i).getColor() == currentLine.getBall(i).getColor()) {
+                    tempLine.remove(i);
+                }
+            } //Alle Schwarzen raus nehmen.
+
+            for (int i = 0; i < tempLine.size(); i++) {
+                System.out.println("tempLine color " + tempLine.get(i).getColor());
+            }
+
+            for (int i = 0; i < currentLine.getBalls().size(); i++) {
+                System.out.println("CurrentColor " + currentLine.getBall(i).getColor());
+                if (tempLine.get(randomInt).getColor() == currentLine.getBall(i).getColor()) {
+                    System.out.println("WURTTTT");
+                    position = currentLine.getBalls().indexOf(tempLine.elementAt(randomInt));//geht nicht? :(
                 }
             }
+
+            retString = "Die Farbe " + tempLine.get(randomInt).getColorString() + " gehört an die Position + " + (position + 1) + ".";
         }
-        return linesWithBlacks;
+
+        return retString;
     }
 }
