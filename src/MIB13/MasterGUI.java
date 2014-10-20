@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import static javax.swing.BoxLayout.*;
 
@@ -35,8 +36,11 @@ public class MasterGUI extends gameGUISKIZZE {
     public Ball ballWhite = new Ball(6);
     public Ball ballBlack = new Ball(7);
 
-    /*
+    public Ball [] ballArray = new Ball [4];
+
+
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
+    /*
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
     ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
     ImageIcon iconYellow = new ImageIcon(ballYellow.getImg());
@@ -159,14 +163,32 @@ public class MasterGUI extends gameGUISKIZZE {
             }
         });
 
-        ballButton[0].addActionListener(new ActionListener() {
+        readTippButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconRed);
-                ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(icontest);
-                anzahlFarbWahlen++;
+                lineArray[derzeitigeRunde] = new Line(ballArray[0], ballArray[1], ballArray[2], ballArray[3]);
+                anzahlFarbWahlen = 0;
+                derzeitigeRunde++;
+                gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
             }
         });
+
+        ballButton[0].addActionListener(new ActionListener() {
+                @Override
+             public void actionPerformed(ActionEvent e) {
+                 if (anzahlFarbWahlen < 4) {
+                    //ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconRed);
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(icontest);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                 }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                  }
+             }
+        });
+
+
+
         //======================================
         //Beispiel für das Auswählen einer Kugel
 

@@ -21,6 +21,8 @@ public class GameHelper {
         return multiColors;
     }
 
+    public MasterLine getMasterLine() {return masterLine};
+
     public int getRound() {
         return round;
     }
