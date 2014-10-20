@@ -44,5 +44,45 @@ public class TestDriverNeil {
         sticks = helper.checkLine(winLine, lineA);
         System.out.println("white black "+ sticks[0]+ " "+sticks[1]); //debug
 
+        //Help Test
+        Line lineArray[] = new Line[4];
+        Ball black = new Ball(Ball.BLACK);
+        Ball blue = new Ball(Ball.BLUE);
+        Ball white = new Ball(Ball.WHITE);
+        Ball cyan = new Ball(Ball.CYAN);
+        Ball yellow = new Ball(Ball.YELLOW);
+        Ball red = new Ball(Ball.RED);
+        Ball magenta = new Ball(Ball.MAGENTA);
+        Ball green = new Ball(Ball.GREEN);
+
+        Line one = new Line(red, blue, white, cyan);
+        Line two = new Line(red, green, cyan, magenta);
+        Line three = new Line(white, red, yellow, blue);
+        Line four = new Line(red, cyan, blue, magenta);
+
+        lineArray[0] = one;
+        lineArray[1] = two;
+        lineArray[2] = three;
+        lineArray[3] = four;
+
+        int help[];
+        help = helper.getHelp(winLine, lineArray); //Red, Cyan, Black, Blue
+        for (int i = 0; i < lineArray.length; i++) {
+            System.out.println(help[i]);
+        }
+
+        //Gui angucken :)
+        //MasterGUI gui = new MasterGUI();
+
     }
 }
+
+/**
+ * Was es zu sagen gibt:
+ * Absolute Pfade gehen mal gar nicht!!
+ * Wir brauchen ein Hintergrundbild != Grau
+ * extends GameGUISKIZZE. Warum??
+ * Nicht alle Dateien hochladen!! Nur source und resource files.
+ * EriC braucht die Größenangaben / Relationen
+ * Ansonsten, sehr hübsch!
+ */

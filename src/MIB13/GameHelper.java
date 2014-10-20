@@ -91,4 +91,25 @@ public class GameHelper {
 
         gameIsRunning = false;
     }
+
+    public int[] getHelp(MasterLine masterLine, Line currentLine) {
+        /**
+         * Wenn der Spieler Hilfe benötigt, soll ihm mit dieser Funktion ein Tipp gegeben werden.
+         * Dazu überprüft diese Funktion
+         */
+        int counter[] = new int[masterLine.getBalls().size()]; //für jede SPALTE
+        int linesWithBlacks[] = new int[lineArray[0].getBalls().size()]; //die Spalten selbst
+
+        for (int i = 0; i < lineArray.length; i++) {
+            for (int j = 0; j < masterLine.getBalls().size(); j++) {
+                if (masterLine.getBall(j).getColor() == lineArray[i].getBall(j).getColor()) {
+                    counter[i]++;
+                    if (counter[i] > 0) {
+                        linesWithBlacks[i] = counter[i];
+                    }
+                }
+            }
+        }
+        return linesWithBlacks;
+    }
 }

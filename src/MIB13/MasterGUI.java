@@ -4,13 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
-
-import static javax.swing.BoxLayout.*;
 
 public class MasterGUI extends gameGUISKIZZE {
     GameHelper gameHelper;
@@ -23,11 +16,13 @@ public class MasterGUI extends gameGUISKIZZE {
     JLabel [][] labelResultDisplay = new JLabel [10][4];
     JLabel  numberLabel, timeLabel;
     JLabel [][]ballLabel = new JLabel[10][4];
-    ImageIcon icon = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/greyBall.png");
-    ImageIcon pin = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pin.png");
-    ImageIcon icontest = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/magenta.png");
-    ImageIcon pinWhite = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pinWhite.png");
-    ImageIcon pinBlack = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pinBlack.png");
+    ImageIcon icon = new ImageIcon("./res/img/icon.png");
+    ImageIcon pin = new ImageIcon("src/MIB13/pics/pin.png");
+    ImageIcon icontest = new ImageIcon("src/MIB13/pics/magenta.png");
+    ImageIcon pinWhite = new ImageIcon("src/MIB13/pics/pinWhite.png");
+    ImageIcon pinBlack = new ImageIcon("src/MIB13/pics/pinBlack.png");
+
+    Dimension numDim = new Dimension(50, 50);
 
     public Ball ballRed = new Ball(0);
     public Ball ballGreen = new Ball(1);
@@ -72,6 +67,7 @@ public class MasterGUI extends gameGUISKIZZE {
         frame.setLocation(100, 100);
         frame.setSize(350, 500);
         frame.setMinimumSize(new Dimension(400, 650));
+        frame.setResizable(false);
         frame.setTitle("Master Main");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -79,13 +75,18 @@ public class MasterGUI extends gameGUISKIZZE {
         lineA.setLayout(new FlowLayout());
         backGround.setLayout(new GridLayout(10, 1));
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        controlPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         //Label erstellen
         for (int j = 0; j < grid.length ;j++) {
             numberLabel = new JLabel();
             numberLabel.setSize(40,40);
             numberLabel.setText(String.valueOf(j + 1));
+            numberLabel.setPreferredSize(numDim);
+            numberLabel.setMinimumSize(numDim);
+            numberLabel.setHorizontalAlignment(JLabel.CENTER);
             panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,2));
+
 
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
@@ -117,7 +118,9 @@ public class MasterGUI extends gameGUISKIZZE {
         ballButton = new JButton[8];
         for (int i = 0; i < ballButton.length; i++){
             ballButton[i] = new JButton(icon);
-            ballButton[i].setSize(50,50);
+            ballButton[i].setSize(100, 50);
+            ballButton[i].setPreferredSize(new Dimension(100, 50));
+            ballButton[i].setMinimumSize(new Dimension(100, 50));
             ballButton[i].setBackground(null);
             //ballButton[i].setBorder(null);
             ballButton[i].setBorderPainted(false);
