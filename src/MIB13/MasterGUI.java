@@ -20,12 +20,14 @@ public class MasterGUI extends gameGUISKIZZE {
     JPanel  lineA = new JPanel();
 
     JPanel [] panelResultDisplay = new JPanel [10];
-    JLabel [] labelResultDisplay = new JLabel [4];
+    JLabel [][] labelResultDisplay = new JLabel [10][4];
     JLabel  numberLabel, timeLabel;
     JLabel [][]ballLabel = new JLabel[10][4];
     ImageIcon icon = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/greyBall.png");
     ImageIcon pin = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pin.png");
     ImageIcon icontest = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/magenta.png");
+    ImageIcon pinWhite = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pinWhite.png");
+    ImageIcon pinBlack = new ImageIcon("/Users/erikrohkohl/IdeaProjects/projekt-mastermind/src/MIB13/pics/pinBlack.png");
 
     public Ball ballRed = new Ball(0);
     public Ball ballGreen = new Ball(1);
@@ -89,11 +91,11 @@ public class MasterGUI extends gameGUISKIZZE {
             for (int i = 0; i < 4; i++) {
                 ballLabel[j][i] = new JLabel(icon);
                 ballLabel[j][i].setSize(40, 40);
-                labelResultDisplay[i] = new JLabel(pin);
+                labelResultDisplay[j][i] = new JLabel(pin);
                 //labelResultDisplay[i].setText("o");
-                labelResultDisplay[i].setSize(5, 5);
+                labelResultDisplay[j][i].setSize(5, 5);
                 grid[j].add(ballLabel[j][i]);
-                panelResultDisplay[j].add(labelResultDisplay[i]);
+                panelResultDisplay[j].add(labelResultDisplay[j][i]);
 
             }
             grid[j].add(panelResultDisplay[j]);
@@ -169,8 +171,21 @@ public class MasterGUI extends gameGUISKIZZE {
                 lineArray[derzeitigeRunde] = new Line(ballArray[0], ballArray[1], ballArray[2], ballArray[3]);
                 anzahlFarbWahlen = 0;
                 derzeitigeRunde++;
-                gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
+                int [] anzSticks = new int[2];
+                anzSticks = gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
+                anzSticks[0] = 2;
+                anzSticks[1] = 2;
+                int k = 0;
+                for (int i = anzSticks[0]; i > 0; i--) {
+                     labelResultDisplay[10 - derzeitigeRunde][k].setIcon(pinBlack);
+                      k++;
+                }
+                for (int i = anzSticks[1]; i > 0; i--) {
+                    labelResultDisplay[10 - derzeitigeRunde][k].setIcon(pinWhite);
+                    k++;
+                }
             }
+
         });
 
         ballButton[0].addActionListener(new ActionListener() {
