@@ -1,7 +1,6 @@
 package MIB13;
 
 import java.util.Random;
-import java.util.Vector;
 
 /**
  * Created by niiru on 17.10.14.
@@ -10,6 +9,7 @@ import java.util.Vector;
  */
 public class GameHelper {
 
+    public final static int LINESIZE = 4;
     private boolean multiColors = false; //Option zum einstellen der Mehrfachfarbauswahl
     private boolean gameIsRunning = true; //TODO Auf false setzen!!
     private int round = 0;
@@ -98,7 +98,7 @@ public class GameHelper {
     public String getHelp(MasterLine masterLine, Line currentLine) {
         /**
          * Wenn der Spieler Hilfe benötigt, soll ihm mit dieser Funktion ein Tipp gegeben werden.
-         * Dazu überprüft diese Funktion
+         * Zurück gibt sie einen String mit einem Lösungsansatz
          */
         int counter[] = new int[masterLine.getBalls().size()]; //für jede SPALTE
         //int linesWithBlacks[] = new int[lineArray[0].getBalls().size()]; //die Spalten selbst
@@ -117,30 +117,35 @@ public class GameHelper {
         }
         if (blackWhites[1] > 1) {
             //2+ Weiße
-            Vector<Ball> tempLine = (Vector<Ball>) masterLine.getBalls().clone();
-            int position = 0;
+            //Vector<Ball> tempLine = (Vector<Ball>) masterLine.getBalls().clone();
+            int tempLines[] = new int[masterLine.getBalls().size()];
+            int position = -1;
             Random random = new Random();
-            int randomInt = random.nextInt(blackWhites[1]);
+            int randomInt;
+
+            for (int i = 0; i < tempLines.length; i++) {
+                tempLines[i] = masterLine.getBall(i).getColor();
+            }
 
             for (int i = 0; i < masterLine.getBalls().size(); i++) {
-                if (masterLine.getBall(i).getColor() == currentLine.getBall(i).getColor()) {
-                    tempLine.remove(i);
+                if (tempLines[i] == currentLine.getBall(i).getColor()) {
+                    tempLines[i] = -1;
                 }
             } //Alle Schwarzen raus nehmen.
 
-            for (int i = 0; i < tempLine.size(); i++) {
-                System.out.println("tempLine color " + tempLine.get(i).getColor());
-            }
+            do {
+                do {
+                    randomInt = random.nextInt(tempLines.length);
+                } while (tempLines[randomInt] == -1);
 
-            for (int i = 0; i < currentLine.getBalls().size(); i++) {
-                System.out.println("CurrentColor " + currentLine.getBall(i).getColor());
-                if (tempLine.get(randomInt).getColor() == currentLine.getBall(i).getColor()) {
-                    System.out.println("WURTTTT");
-                    position = currentLine.getBalls().indexOf(tempLine.elementAt(randomInt));//geht nicht? :(
+                for (int i = 0; i < currentLine.getBalls().size(); i++) {
+                    if (tempLines[randomInt] == currentLine.getBall(i).getColor()) {
+                        position = randomInt;
+                    }
                 }
-            }
+            } while (position == -1);
 
-            retString = "Die Farbe " + tempLine.get(randomInt).getColorString() + " gehört an die Position + " + (position + 1) + ".";
+            retString = "Die Farbe " + masterLine.getBall(randomInt).getColorString() + " gehört an die Position: " + (position + 1) + ".";
         }
 
         return retString;

@@ -17,6 +17,7 @@ import java.io.IOException;
 public class Ball {
 
     public final static int RED = 0, MAGENTA = 1, YELLOW = 2, GREEN = 3, BLUE = 4, CYAN = 5, WHITE = 6, BLACK = 7;
+    public final static int COLORCOUNT = 8;
     private BufferedImage img;
     private int color;
     private String colorString;

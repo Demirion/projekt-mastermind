@@ -74,6 +74,30 @@ public class TestDriverNeil {
             System.out.println();
         }
 
+        System.out.println("LineArray[0]");
+        for (int i = 0; i < 4; i++) {
+            System.out.println(lineArray[0].getBall(i).getColor());
+        }
+        System.out.println("WinLine");
+        for (int i = 0; i < 4; i++) {
+            System.out.println(winLine.getBall(i).getColor());
+        }
+        System.out.println();
+        System.out.println(helper.getHelp(winLine, lineArray[0]));
+
+        Line cheatLine = new Line(green, red, green, red);
+        MasterLine cheatMasterLine = new MasterLine(true);
+        cheatMasterLine.addBall(red);
+        cheatMasterLine.addBall(red);
+        cheatMasterLine.addBall(red);
+        cheatMasterLine.addBall(green);
+        System.out.println(helper.getHelp(cheatMasterLine, cheatLine));
+
+        //MasterLine stuff
+
+        System.out.println();
+        System.out.println();
+        MasterLine neueMasterLine = new MasterLine(false);
 
         //Gui angucken :)
         //MasterGUI gui = new MasterGUI();
