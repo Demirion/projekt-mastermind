@@ -8,6 +8,8 @@ package MIB13;
  * Farben doppelt vorkommen dürfen.
  */
 public class MasterLine extends Line {
+	
+	new Balls[] = new Int[3];
 
     public MasterLine(boolean multiColors) {
 
@@ -29,6 +31,10 @@ public class MasterLine extends Line {
          * Für jede Farbe soll eine neue Kugel erzeugt
          * und dem Balls[] hinzugefügt werden.
          */
+    	
+    	for (int i = 0; i <= 3; i++){
+    		Balls[i] = randomNumberGenerator();
+    	}
 
     }
 
@@ -42,6 +48,21 @@ public class MasterLine extends Line {
          * Für jede Farbe soll eine neue Kugel erzeugt
          * und dem Balls[] hinzugefügt werden.
          */
+    	
+    	int x = 0;
+    	int y = 0;
+    	
+    	for (int i = 0; i <= 3; i++) {
+    		do {
+    			x = randomNumberGenerator();
+    			for (int j = 0; j <= 3; j++) {
+    				if (x == Balls[j]) {
+    					y = 1;
+    				}
+    			}
+    		} while (y == 1);
+    		Balls[i] = x;
+    	}
 
     }
 
@@ -50,10 +71,10 @@ public class MasterLine extends Line {
          * Es soll nur eine Zufällige Zahl generiert werden.
          * Zahlenraum 0 - n für n = Anzahl der Farben-1
          */
-        int random;
+        int random = generator.nextInt(7);
 
 
-        return 0; //random
+        return random; //random
     }
 
 }
