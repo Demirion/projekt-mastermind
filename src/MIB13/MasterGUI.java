@@ -16,11 +16,11 @@ public class MasterGUI extends gameGUISKIZZE {
     JLabel [][] labelResultDisplay = new JLabel [10][4];
     JLabel  numberLabel, timeLabel;
     JLabel [][]ballLabel = new JLabel[10][4];
-    ImageIcon icon = new ImageIcon("./res/img/icon.png");
-    ImageIcon pin = new ImageIcon("src/MIB13/pics/pin.png");
-    ImageIcon icontest = new ImageIcon("src/MIB13/pics/magenta.png");
-    ImageIcon pinWhite = new ImageIcon("src/MIB13/pics/pinWhite.png");
-    ImageIcon pinBlack = new ImageIcon("src/MIB13/pics/pinBlack.png");
+    ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
+    ImageIcon pin = new ImageIcon("./res/img/pin.png");
+    ImageIcon icontest = new ImageIcon("./res/img/magenta.png");
+    ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
+    ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
 
     Dimension numDim = new Dimension(50, 50);
 
@@ -37,7 +37,6 @@ public class MasterGUI extends gameGUISKIZZE {
 
 
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
-    /*
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
     ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
     ImageIcon iconYellow = new ImageIcon(ballYellow.getImg());
@@ -45,7 +44,6 @@ public class MasterGUI extends gameGUISKIZZE {
     ImageIcon iconBlue = new ImageIcon(ballBlue.getImg());
     ImageIcon iconWhite = new ImageIcon(ballWhite.getImg());
     ImageIcon iconBlack = new ImageIcon(ballBlack.getImg());
-    */
 
 
     public MasterGUI(){
@@ -80,7 +78,7 @@ public class MasterGUI extends gameGUISKIZZE {
         //Label erstellen
         for (int j = 0; j < grid.length ;j++) {
             numberLabel = new JLabel();
-            numberLabel.setSize(40,40);
+            numberLabel.setSize(50,50);
             numberLabel.setText(String.valueOf(j + 1));
             numberLabel.setPreferredSize(numDim);
             numberLabel.setMinimumSize(numDim);
@@ -91,7 +89,7 @@ public class MasterGUI extends gameGUISKIZZE {
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
                 ballLabel[j][i] = new JLabel(icon);
-                ballLabel[j][i].setSize(40, 40);
+                ballLabel[j][i].setSize(50, 50);
                 labelResultDisplay[j][i] = new JLabel(pin);
                 //labelResultDisplay[i].setText("o");
                 labelResultDisplay[j][i].setSize(5, 5);
@@ -128,7 +126,15 @@ public class MasterGUI extends gameGUISKIZZE {
             controlPanel.add(ballButton[i]);
         }
         //ballButton[0].setIcon(ballMagenta.getImg());
-        ballButton[0].setIcon(icontest);
+        //ballButton[0].setIcon(icontest);
+        ballButton[0].setIcon(iconRed);
+        ballButton[1].setIcon(iconMagenta);
+        ballButton[2].setIcon(iconYellow);
+        ballButton[3].setIcon(iconGreen);
+        ballButton[4].setIcon(iconBlue);
+        ballButton[5].setIcon(iconCyan);
+        ballButton[6].setIcon(iconWhite);
+        ballButton[7].setIcon(iconBlack);
 
         //Button um Tipp abzugeben
         readTippButton = new JButton("Tipp abgeben");

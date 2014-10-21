@@ -78,16 +78,14 @@ public class Ball {
                 break;
 
             default: //Darf eigentlich nicht passieren!
-                //TODO GRAFIKER - Bitte eine Farblos.jpg erstellen, da das Programm sonst abstürzt!
                 this.colorString = "Farblos";
                 this.color = -1;
                 break;
         }
         try {
-            //TODO GRAFIKER - Dateiendung ggf. Ändern.
-            img = ImageIO.read(new File("./res/img/" + this.colorString + ".gif")); //gif in jpg ändern?
+            img = ImageIO.read(new File("./res/img/" + this.colorString + ".png"));
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println("Could not load Image.");
         }
     }
