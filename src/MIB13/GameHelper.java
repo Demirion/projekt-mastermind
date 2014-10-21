@@ -109,11 +109,11 @@ public class GameHelper {
 
         if (blackWhites[1] == 0) {
             //0 Weiße
-            return "Keine der Farben passt. Schließe diese Kategorisch aus!";
+            return "Keine der Farben passt. Schließe diese kategorisch aus!";
         }
         if (blackWhites[1] == 1) {
             //1 Weißer
-            retString = "Probier es nochmal ;)";
+            retString = "Probier es noch mal ;)";
         }
         if (blackWhites[1] > 1) {
             //2+ Weiße
