@@ -1,9 +1,13 @@
 package MIB13;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class MasterGUI {
     public Ball ballRed = new Ball(0);
@@ -29,6 +33,9 @@ public class MasterGUI {
     ImageIcon icontest = new ImageIcon("./res/img/magenta.png");
     ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
     ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
+    ImageIcon newgame = new ImageIcon("./res/img/newgame.png");
+    ImageIcon tip = new ImageIcon("./res/img/tip.png");
+    ImageIcon background = new ImageIcon("./res/img/backgroundtest.png");
     Dimension numDim = new Dimension(50, 50);
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
@@ -46,7 +53,7 @@ public class MasterGUI {
 
     void Init() {
         //Am besten wäre es wohl ein Gitter zu erstellen, welches wie Folgt aufgebaut ist:
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Mastermind");
         JPanel backGround = new JPanel();
         JPanel controlPanel = new JPanel();
         JPanel panelFrameControl = new JPanel(new BorderLayout());
@@ -60,7 +67,6 @@ public class MasterGUI {
         frame.setSize(350, 500);
         frame.setMinimumSize(new Dimension(450, 650));
         frame.setResizable(false);
-        frame.setTitle("Master Main");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //LayoutManager
@@ -95,16 +101,22 @@ public class MasterGUI {
             backGround.add(grid[j]);
         }
 
-        //Neues Game Button
-        newGameButton = new JButton("Neues Spiel");
-        newGameButton.setSize(300,50);
-        //newGameButton.setLocation(300,10);
-        controlPanel.add(newGameButton);
-
         //Label für Zeit
         timeLabel = new JLabel("Zeit");
         timeLabel.setSize(100,100);
         controlPanel.add(timeLabel);
+        
+        //Neues Game Button
+        newGameButton = new JButton(newgame);
+        newGameButton.setSize(100,30);
+        newGameButton.setMinimumSize(new Dimension(100, 30));
+        newGameButton.setPreferredSize(new Dimension(100, 30));
+        newGameButton.setFocusPainted(false);
+        newGameButton.setBackground(new Color (0,0,0,0));
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setBorderPainted(false);
+        //newGameButton.setLocation(300,10);
+        controlPanel.add(newGameButton);
 
         //Button für Ball erzeugen
         ballButton = new JButton[8];
@@ -133,8 +145,14 @@ public class MasterGUI {
         ballButton[7].setIcon(iconBlack);
 
         //Button um Tipp abzugeben
-        readTippButton = new JButton("Tipp abgeben");
-        readTippButton.setSize(100,50);
+        readTippButton = new JButton(tip);
+        readTippButton.setSize(100,30);
+        readTippButton.setMinimumSize(new Dimension(100, 30));
+        readTippButton.setPreferredSize(new Dimension(100, 30));
+        readTippButton.setFocusPainted(false);
+        readTippButton.setBackground(new Color (0,0,0,0));
+        readTippButton.setContentAreaFilled(false);
+        readTippButton.setBorderPainted(false);
         controlPanel.add(readTippButton);
 
         panelFrameControl.add(backGround, BorderLayout.WEST);
