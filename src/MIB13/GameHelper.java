@@ -24,12 +24,6 @@ public class GameHelper {
         return multiColors;
     }
 
-    public MasterLine getMasterLine() {return masterLine;}
-
-    public int getRound() {
-        return round;
-    }
-
     public void setMultiColors(boolean multiColors) {
         /**
          * Diese wird von dem Actionlistener der CheckBox aufgerufen!!
@@ -37,35 +31,46 @@ public class GameHelper {
         this.multiColors = multiColors;
     }
 
-    public void init() {
+    public MasterLine getMasterLine() {
+        return masterLine;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
         /**
          * Initialisierung.
          * TODO Alle Werte auf 0 bzw false setzen.
          */
+        public void init() {
         round = 0;
         masterLine = null;
 
     }
 
-    public void start() {
         /**
          * Spielstart.
          * TODO Es soll überprüft werden, ob die Multicolors option gesetzt wurde und danach
          * eine MasterLine mit dem Argument multiColors erstellt werden.
          */
+        public void start() {
         init();
         masterLine = new MasterLine(isMultiColors());
         gameIsRunning = true;
 
     }
 
-    public int[] checkLine(MasterLine masterLine, Line line) { //Fertig(?)
         /**
          * Methode zum vergleichen der derzeitigen Zeile mit der MasterLine.
          * Bei gleichheit (blackSticks == 4) wird die Methode gameWon aufgerufen.
          *
          * Gibt int Array mit anzahl der Schwarzen und Weißen Sticks zurück.
+         * @param line To be checked Line.
+         * @param masterLine The Line with the code needed to win.
+         * @return Returns an IntArray with the amount of Black and White sticks. [0] == Black, [1] == White.
          */
+        public int[] checkLine(MasterLine masterLine, Line line) { //Fertig(?)
         if (gameIsRunning) {
             sticks[0] = sticks[1] = 0;
 
@@ -86,20 +91,22 @@ public class GameHelper {
         return sticks;
     }
 
-    public void gameWon() {
         /**
          * Wenn das Spiel gewonnen ist, werden "Highscore" berechnet und das Spiel auf nicht laufend gesetzt.
          */
+        public void gameWon() {
         System.out.println("Gewonnen!"); //Debug
 
         gameIsRunning = false;
     }
 
-    public String getHelp(MasterLine masterLine, Line currentLine) {
         /**
          * Wenn der Spieler Hilfe benötigt, soll ihm mit dieser Funktion ein Tipp gegeben werden.
-         * Zurück gibt sie einen String mit einem Lösungsansatz
+         * @param currentLine The Line of the current Round.
+         * @param masterLine The Line with the code needed to win.
+         * @return String mit einem Lösungsansatz.
          */
+        public String getHelp(MasterLine masterLine, Line currentLine) {
         int counter[] = new int[masterLine.getBalls().size()]; //für jede SPALTE
         //int linesWithBlacks[] = new int[lineArray[0].getBalls().size()]; //die Spalten selbst
 

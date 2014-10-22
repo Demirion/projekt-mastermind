@@ -5,25 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MasterGUI extends gameGUISKIZZE {
-    GameHelper gameHelper;
-    Line lineArray[] = new Line[10];
-    int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
-    JButton newGameButton, ballButton[], readTippButton;
-    JPanel  lineA = new JPanel();
-
-    JPanel [] panelResultDisplay = new JPanel [10];
-    JLabel [][] labelResultDisplay = new JLabel [10][4];
-    JLabel  numberLabel, timeLabel;
-    JLabel [][]ballLabel = new JLabel[10][4];
-    ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
-    ImageIcon pin = new ImageIcon("./res/img/pin.png");
-    ImageIcon icontest = new ImageIcon("./res/img/magenta.png");
-    ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
-    ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
-
-    Dimension numDim = new Dimension(50, 50);
-
+public class MasterGUI {
     public Ball ballRed = new Ball(0);
     public Ball ballGreen = new Ball(1);
     public Ball ballMagenta = new Ball(2);
@@ -32,10 +14,22 @@ public class MasterGUI extends gameGUISKIZZE {
     public Ball ballBlue = new Ball(5);
     public Ball ballWhite = new Ball(6);
     public Ball ballBlack = new Ball(7);
-
     public Ball [] ballArray = new Ball [4];
-
-
+    GameHelper gameHelper;
+    Line lineArray[] = new Line[10];
+    int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
+    JButton newGameButton, ballButton[], readTippButton;
+    JPanel lineA = new JPanel();
+    JPanel[] panelResultDisplay = new JPanel[10];
+    JLabel[][] labelResultDisplay = new JLabel[10][4];
+    JLabel numberLabel, timeLabel;
+    JLabel[][] ballLabel = new JLabel[10][4];
+    ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
+    ImageIcon pin = new ImageIcon("./res/img/pin.png");
+    ImageIcon icontest = new ImageIcon("./res/img/magenta.png");
+    ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
+    ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
+    Dimension numDim = new Dimension(50, 50);
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
     ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());

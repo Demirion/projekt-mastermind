@@ -9,14 +9,16 @@ import java.util.Vector;
  * Eine Line wird zum Spielstart initialisiert, die restlichen vom Benutzer gefüllt.
  */
 public class Line {
+    private static int lineID = 0;
+    protected int lineNumber; //Unwichtig??
     //private Ball balls[] = new Ball[4];
     private Vector<Ball> balls = new Vector<Ball>(4);
-    protected int lineNumber; //Unwichtig??
-    private static int lineID = 0;
 
     public Line() {
         lineNumber = lineID++;
-    }; //Standard Constructor
+    }
+
+    ; //Standard Constructor
 
     public Line(Ball a, Ball b, Ball c, Ball d) {
         addBall(a);
@@ -26,6 +28,9 @@ public class Line {
         lineNumber = lineID++;
     }
 
+    /**
+     * @param b A Ball to be added to the Vector.
+     */
     public void addBall(Ball b) {
         if (balls.size() < 4) {
             balls.add(b);
@@ -34,6 +39,9 @@ public class Line {
         }
     }
 
+    /**
+     * Removes the Ball in the last slot of the Vector.
+     */
     public void removeLastBall() {
         if (balls.size() > 0)
             balls.remove(balls.size());
@@ -48,6 +56,10 @@ public class Line {
         return lineNumber;
     }
 
+    /**
+     * @param i The position of the Ball  in the Vector.
+     * @return Returns the Ball at position i in the Vector.
+     */
     public Ball getBall(int i) {
         return balls.elementAt(i);
     }

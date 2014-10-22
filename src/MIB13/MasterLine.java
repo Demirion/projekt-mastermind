@@ -23,32 +23,32 @@ public class MasterLine extends Line {
         lineNumber = -1; //Unnötig? Identifizierend für die Masterline (negative Zahl)
     }
 
+    /**
+     * Es sollen 4 zufällige Zahlen durch RNG berechnet werden.
+     * <p/>
+     * Wiederholungen sind ERLAUBT und gewünscht.
+     * <p/>
+     * Jede Zahl steht für eine Farbe.
+     * Für jede Farbe soll eine neue Kugel erzeugt
+     * und dem Balls Vektor hinzugefügt werden.
+     */
     private void createMultiLine() {
-        /**
-         * Es sollen 4 zufällige Zahlen durch RNG berechnet werden.
-         *
-         * Wiederholungen sind ERLAUBT und gewünscht.
-         *
-         * Jede Zahl steht für eine Farbe.
-         * Für jede Farbe soll eine neue Kugel erzeugt
-         * und dem Balls Vektor hinzugefügt werden.
-         */
 
         for (int i = 0; i < GameHelper.LINESIZE; i++) {
             addBall(new Ball(random.nextInt(Ball.COLORCOUNT)));
         }
     }
 
+    /**
+     * Es sollen 4 zufällige Zahlen durch RNG berechnet werden.
+     * <p/>
+     * Wiederholungen sind NICHT erlaubt.
+     * <p/>
+     * Jede Zahl steht für eine Farbe.
+     * Für jede Farbe soll eine neue Kugel erzeugt
+     * und dem Balls Vektor hinzugefügt werden.
+     */
     private void createSimpleLine() {
-        /**
-         * Es sollen 4 zufällige Zahlen durch RNG berechnet werden.
-         *
-         * Wiederholungen sind NICHT erlaubt.
-         *
-         * Jede Zahl steht für eine Farbe.
-         * Für jede Farbe soll eine neue Kugel erzeugt
-         * und dem Balls Vektor hinzugefügt werden.
-         */
 
         int colorCount = Ball.COLORCOUNT, randInt;
         Vector<Ball> newBalls = new Vector<Ball>(Ball.COLORCOUNT);

@@ -12,34 +12,18 @@ import java.io.IOException;
  * Die Farben werden über Nummern verteilt. (Siehe README oder unten)
  * Damit lässt sich leicher Arbeiten als mit Strings.
  *
- * Das Laden der Bilder passiert über den colorString mit der Dateiendung gif(später jpg??)
+ * Das Laden der Bilder passiert über den colorString mit der Dateiendung png.
+ *
  */
 public class Ball {
 
     public final static int RED = 0, MAGENTA = 1, YELLOW = 2, GREEN = 3, BLUE = 4, CYAN = 5, WHITE = 6, BLACK = 7;
     public final static int COLORCOUNT = 8;
+    public static int idCounter = 0;
+    int id;
     private BufferedImage img;
     private int color;
     private String colorString;
-
-    public String getColorString() {
-        return colorString;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public static int idCounter = 0;
-    int id;
-
-    public BufferedImage getImg() {
-        return img;
-    }
-
-    public int getColor() {
-        return color;
-    }
 
     public Ball(int i) {
         id = idCounter++;
@@ -88,5 +72,21 @@ public class Ball {
             e.printStackTrace();
             System.out.println("Could not load Image.");
         }
+    }
+
+    public String getColorString() {
+        return colorString;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public BufferedImage getImg() {
+        return img;
+    }
+
+    public int getColor() {
+        return color;
     }
 }
