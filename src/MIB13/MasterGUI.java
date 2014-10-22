@@ -64,7 +64,7 @@ public class MasterGUI extends gameGUISKIZZE {
         //Frame aufbauen
         frame.setLocation(100, 100);
         frame.setSize(350, 500);
-        frame.setMinimumSize(new Dimension(400, 650));
+        frame.setMinimumSize(new Dimension(450, 650));
         frame.setResizable(false);
         frame.setTitle("Master Main");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,7 +119,9 @@ public class MasterGUI extends gameGUISKIZZE {
             ballButton[i].setSize(100, 50);
             ballButton[i].setPreferredSize(new Dimension(100, 50));
             ballButton[i].setMinimumSize(new Dimension(100, 50));
-            ballButton[i].setBackground(null);
+            ballButton[i].setBackground(new Color (0,0,0,0));
+            ballButton[i].setContentAreaFilled(false);
+            ballButton[i].setFocusPainted(false);
             //ballButton[i].setBorder(null);
             ballButton[i].setBorderPainted(false);
             ballButton[i].setLocation(325,60 + i * 50);
