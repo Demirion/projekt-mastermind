@@ -1,9 +1,13 @@
 package MIB13;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -36,12 +40,9 @@ public class MasterGUI {
     public Ball ballCyan = new Ball(5);
     public Ball ballWhite = new Ball(6);
     public Ball ballBlack = new Ball(7);
-
     public Ball [] ballArray = new Ball [4];
 
-
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
-
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
     ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
     ImageIcon iconYellow = new ImageIcon(ballYellow.getImg());
@@ -50,6 +51,7 @@ public class MasterGUI {
     ImageIcon iconWhite = new ImageIcon(ballWhite.getImg());
     ImageIcon iconBlack = new ImageIcon(ballBlack.getImg());
 
+    private BufferedImage backgroundImage;
 
 
     public MasterGUI(){
@@ -67,6 +69,11 @@ public class MasterGUI {
             grid[i] = new JPanel();
         }
 
+        try {
+            backgroundImage = ImageIO.read(new File("./res/img/backgroundtest.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //Frame aufbauen
         frame.setLocation(100, 100);
         frame.setSize(350, 500);
@@ -91,7 +98,6 @@ public class MasterGUI {
                 ballLabel[j][i] = new JLabel(icon);
                 ballLabel[j][i].setSize(40, 40);
                 labelResultDisplay[j][i] = new JLabel(pin);
-                //labelResultDisplay[i].setText("o");
                 labelResultDisplay[j][i].setSize(5, 5);
                 grid[j].add(ballLabel[j][i]);
                 panelResultDisplay[j].add(labelResultDisplay[j][i]);
@@ -147,14 +153,15 @@ public class MasterGUI {
         frame.add(panelFrameControl);
         frame.setVisible(true);
 
-        //TODO ballbutton bilder zuweisen
 
-        //TODO label für die Anzeige der Richtigen hinzufügen
-
-        //TODO reihenfolge zahlen umkehren
+        //TODO menubar
+        //TODO messagedialog für neues spiel wenn noch eins läuft
+        //TODO hintergrundbild
         //===================================
 
         gameHelper = new GameHelper();
+        gameHelper.start();
+        gameHelper.setMultiColors(false);
         //==================================
 
         //ActionListener
@@ -178,21 +185,25 @@ public class MasterGUI {
         readTippButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lineArray[derzeitigeRunde] = new Line(ballArray[0], ballArray[1], ballArray[2], ballArray[3]);
-                anzahlFarbWahlen = 0;
-                derzeitigeRunde++;
-                int [] anzSticks = new int[2];
-                //anzSticks = gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
-                anzSticks[0] = 2;
-                anzSticks[1] = 2;
-                int k = 0;
-                for (int i = anzSticks[0]; i > 0; i--) {
-                     labelResultDisplay[10 - derzeitigeRunde][k].setIcon(pinBlack);
-                      k++;
-                }
-                for (int i = anzSticks[1]; i > 0; i--) {
-                    labelResultDisplay[10 - derzeitigeRunde][k].setIcon(pinWhite);
-                    k++;
+                if (anzahlFarbWahlen > 3) {
+                    lineArray[derzeitigeRunde] = new Line(ballArray[0], ballArray[1], ballArray[2], ballArray[3]);
+                    anzahlFarbWahlen = 0;
+
+                    int[] anzSticks = new int[2];
+                    anzSticks = gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
+                    System.out.println(anzSticks[0] + " " + anzSticks[1]);
+                    int k = 0;
+                    for (int i = anzSticks[0]; i > 0; i--) {
+                        labelResultDisplay[9 - derzeitigeRunde][k].setIcon(pinBlack);
+                        k++;
+                    }
+                    for (int i = anzSticks[1]; i > 0; i--) {
+                        labelResultDisplay[9 - derzeitigeRunde][k].setIcon(pinWhite);
+                        k++;
+                    }
+                    derzeitigeRunde++;
+                }else {
+                    JOptionPane.showMessageDialog(null,"Bitte erst vier Kugeln auswählen.","Warnung", JOptionPane.PLAIN_MESSAGE);
                 }
             }
 
@@ -206,7 +217,7 @@ public class MasterGUI {
                     ballArray[anzahlFarbWahlen] = new Ball(0);
                     anzahlFarbWahlen++;
                  }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben.","Warnung", JOptionPane.PLAIN_MESSAGE);
                   }
              }
         });
@@ -215,7 +226,7 @@ public class MasterGUI {
             public void actionPerformed(ActionEvent e) {
                 if (anzahlFarbWahlen < 4) {
                     ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconMagenta);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    ballArray[anzahlFarbWahlen] = new Ball(1);
                     anzahlFarbWahlen++;
                 }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -227,7 +238,7 @@ public class MasterGUI {
             public void actionPerformed(ActionEvent e) {
                 if (anzahlFarbWahlen < 4) {
                     ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconYellow);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    ballArray[anzahlFarbWahlen] = new Ball(2);
                     anzahlFarbWahlen++;
                 }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -239,7 +250,7 @@ public class MasterGUI {
             public void actionPerformed(ActionEvent e) {
                 if (anzahlFarbWahlen < 4) {
                     ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconGreen);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    ballArray[anzahlFarbWahlen] = new Ball(3);
                     anzahlFarbWahlen++;
                 }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -251,7 +262,7 @@ public class MasterGUI {
             public void actionPerformed(ActionEvent e) {
                 if (anzahlFarbWahlen < 4) {
                     ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconBlue);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    ballArray[anzahlFarbWahlen] = new Ball(4);
                     anzahlFarbWahlen++;
                 }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -263,7 +274,7 @@ public class MasterGUI {
             public void actionPerformed(ActionEvent e) {
                 if (anzahlFarbWahlen < 4) {
                     ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconCyan);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    ballArray[anzahlFarbWahlen] = new Ball(5);
                     anzahlFarbWahlen++;
                 }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -275,7 +286,7 @@ public class MasterGUI {
             public void actionPerformed(ActionEvent e) {
                 if (anzahlFarbWahlen < 4) {
                     ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconWhite);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    ballArray[anzahlFarbWahlen] = new Ball(6);
                     anzahlFarbWahlen++;
                 }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -287,7 +298,7 @@ public class MasterGUI {
             public void actionPerformed(ActionEvent e) {
                 if (anzahlFarbWahlen < 4) {
                     ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconBlack);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    ballArray[anzahlFarbWahlen] = new Ball(7);
                     anzahlFarbWahlen++;
                 }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
