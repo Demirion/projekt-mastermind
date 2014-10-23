@@ -1,43 +1,47 @@
 package MIB13;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+
+import static javax.swing.BoxLayout.*;
 
 public class MasterGUI {
-    public Ball ballRed = new Ball(0);
-    public Ball ballGreen = new Ball(1);
-    public Ball ballMagenta = new Ball(2);
-    public Ball ballYellow = new Ball(3);
-    public Ball ballCyan = new Ball(4);
-    public Ball ballBlue = new Ball(5);
-    public Ball ballWhite = new Ball(6);
-    public Ball ballBlack = new Ball(7);
-    public Ball [] ballArray = new Ball [4];
     GameHelper gameHelper;
     Line lineArray[] = new Line[10];
     int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
     JButton newGameButton, ballButton[], readTippButton;
-    JPanel lineA = new JPanel();
-    JPanel[] panelResultDisplay = new JPanel[10];
-    JLabel[][] labelResultDisplay = new JLabel[10][4];
-    JLabel numberLabel, timeLabel;
-    JLabel[][] ballLabel = new JLabel[10][4];
+    JPanel  lineA = new JPanel();
+
+    JPanel [] panelResultDisplay = new JPanel [10];
+    JLabel [][] labelResultDisplay = new JLabel [10][4];
+    JLabel  numberLabel, timeLabel;
+    JLabel [][]ballLabel = new JLabel[10][4];
     ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
     ImageIcon pin = new ImageIcon("./res/img/pin.png");
-    ImageIcon icontest = new ImageIcon("./res/img/magenta.png");
     ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
     ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
-    ImageIcon newgame = new ImageIcon("./res/img/newgame.png");
-    ImageIcon tip = new ImageIcon("./res/img/tip.png");
-    ImageIcon background = new ImageIcon("./res/img/backgroundtest.png");
-    Dimension numDim = new Dimension(50, 50);
+
+    public Ball ballRed = new Ball(0);
+    public Ball ballMagenta = new Ball(1);
+    public Ball ballYellow = new Ball(2);
+    public Ball ballGreen = new Ball(3);
+    public Ball ballBlue = new Ball(4);
+    public Ball ballCyan = new Ball(5);
+    public Ball ballWhite = new Ball(6);
+    public Ball ballBlack = new Ball(7);
+
+    public Ball [] ballArray = new Ball [4];
+
+
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
+
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
     ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
     ImageIcon iconYellow = new ImageIcon(ballYellow.getImg());
@@ -47,13 +51,14 @@ public class MasterGUI {
     ImageIcon iconBlack = new ImageIcon(ballBlack.getImg());
 
 
+
     public MasterGUI(){
         Init();
     }
 
     void Init() {
         //Am besten wäre es wohl ein Gitter zu erstellen, welches wie Folgt aufgebaut ist:
-        JFrame frame = new JFrame("Mastermind");
+        JFrame frame = new JFrame();
         JPanel backGround = new JPanel();
         JPanel controlPanel = new JPanel();
         JPanel panelFrameControl = new JPanel(new BorderLayout());
@@ -65,31 +70,26 @@ public class MasterGUI {
         //Frame aufbauen
         frame.setLocation(100, 100);
         frame.setSize(350, 500);
-        frame.setMinimumSize(new Dimension(450, 650));
-        frame.setResizable(false);
+        frame.setMinimumSize(new Dimension(400, 650));
+        frame.setTitle("Master Main");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //LayoutManager
         lineA.setLayout(new FlowLayout());
         backGround.setLayout(new GridLayout(10, 1));
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
-        controlPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         //Label erstellen
         for (int j = 0; j < grid.length ;j++) {
             numberLabel = new JLabel();
-            numberLabel.setSize(50,50);
+            numberLabel.setSize(40,40);
             numberLabel.setText(String.valueOf(j + 1));
-            numberLabel.setPreferredSize(numDim);
-            numberLabel.setMinimumSize(numDim);
-            numberLabel.setHorizontalAlignment(JLabel.CENTER);
             panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,2));
-
 
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
                 ballLabel[j][i] = new JLabel(icon);
-                ballLabel[j][i].setSize(50, 50);
+                ballLabel[j][i].setSize(40, 40);
                 labelResultDisplay[j][i] = new JLabel(pin);
                 //labelResultDisplay[i].setText("o");
                 labelResultDisplay[j][i].setSize(5, 5);
@@ -101,40 +101,30 @@ public class MasterGUI {
             backGround.add(grid[j]);
         }
 
+        //Neues Game Button
+        newGameButton = new JButton();
+        newGameButton.setSize(300,50);
+        newGameButton.setIcon(new ImageIcon("./res/img/newgame.png"));
+        newGameButton.setBackground(null);
+        newGameButton.setBorderPainted(false);
+        controlPanel.add(newGameButton);
+
         //Label für Zeit
         timeLabel = new JLabel("Zeit");
         timeLabel.setSize(100,100);
         controlPanel.add(timeLabel);
-        
-        //Neues Game Button
-        newGameButton = new JButton(newgame);
-        newGameButton.setSize(100,30);
-        newGameButton.setMinimumSize(new Dimension(100, 30));
-        newGameButton.setPreferredSize(new Dimension(100, 30));
-        newGameButton.setFocusPainted(false);
-        newGameButton.setBackground(new Color (0,0,0,0));
-        newGameButton.setContentAreaFilled(false);
-        newGameButton.setBorderPainted(false);
-        //newGameButton.setLocation(300,10);
-        controlPanel.add(newGameButton);
 
         //Button für Ball erzeugen
         ballButton = new JButton[8];
         for (int i = 0; i < ballButton.length; i++){
             ballButton[i] = new JButton(icon);
-            ballButton[i].setSize(100, 50);
-            ballButton[i].setPreferredSize(new Dimension(100, 50));
-            ballButton[i].setMinimumSize(new Dimension(100, 50));
-            ballButton[i].setBackground(new Color (0,0,0,0));
-            ballButton[i].setContentAreaFilled(false);
-            ballButton[i].setFocusPainted(false);
+            ballButton[i].setSize(50,50);
+            ballButton[i].setBackground(null);
             //ballButton[i].setBorder(null);
             ballButton[i].setBorderPainted(false);
             ballButton[i].setLocation(325,60 + i * 50);
             controlPanel.add(ballButton[i]);
         }
-        //ballButton[0].setIcon(ballMagenta.getImg());
-        //ballButton[0].setIcon(icontest);
         ballButton[0].setIcon(iconRed);
         ballButton[1].setIcon(iconMagenta);
         ballButton[2].setIcon(iconYellow);
@@ -145,13 +135,10 @@ public class MasterGUI {
         ballButton[7].setIcon(iconBlack);
 
         //Button um Tipp abzugeben
-        readTippButton = new JButton(tip);
-        readTippButton.setSize(100,30);
-        readTippButton.setMinimumSize(new Dimension(100, 30));
-        readTippButton.setPreferredSize(new Dimension(100, 30));
-        readTippButton.setFocusPainted(false);
-        readTippButton.setBackground(new Color (0,0,0,0));
-        readTippButton.setContentAreaFilled(false);
+        readTippButton = new JButton();
+        readTippButton.setSize(100,50);
+        readTippButton.setIcon(new ImageIcon("./res/img/tip.png"));
+        readTippButton.setBackground(null);
         readTippButton.setBorderPainted(false);
         controlPanel.add(readTippButton);
 
@@ -195,7 +182,7 @@ public class MasterGUI {
                 anzahlFarbWahlen = 0;
                 derzeitigeRunde++;
                 int [] anzSticks = new int[2];
-                anzSticks = gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
+                //anzSticks = gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
                 anzSticks[0] = 2;
                 anzSticks[1] = 2;
                 int k = 0;
@@ -215,14 +202,97 @@ public class MasterGUI {
                 @Override
              public void actionPerformed(ActionEvent e) {
                  if (anzahlFarbWahlen < 4) {
-                    //ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconRed);
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(icontest);
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconRed);
                     ballArray[anzahlFarbWahlen] = new Ball(0);
                     anzahlFarbWahlen++;
                  }else{
                     JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
                   }
              }
+        });
+        ballButton[1].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (anzahlFarbWahlen < 4) {
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconMagenta);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+        ballButton[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (anzahlFarbWahlen < 4) {
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconYellow);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+        ballButton[3].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (anzahlFarbWahlen < 4) {
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconGreen);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+        ballButton[4].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (anzahlFarbWahlen < 4) {
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconBlue);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+        ballButton[5].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (anzahlFarbWahlen < 4) {
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconCyan);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+        ballButton[6].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (anzahlFarbWahlen < 4) {
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconWhite);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+        ballButton[7].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (anzahlFarbWahlen < 4) {
+                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconBlack);
+                    ballArray[anzahlFarbWahlen] = new Ball(0);
+                    anzahlFarbWahlen++;
+                }else{
+                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
         });
 
 
