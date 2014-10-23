@@ -100,7 +100,7 @@ public class TestDriverNeil {
         MasterLine neueMasterLine = new MasterLine(false);
 
         //Gui angucken :)
-        //MasterGUI gui = new MasterGUI();
+        MasterGUI gui = new MasterGUI();
 
     }
 }

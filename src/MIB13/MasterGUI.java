@@ -1,37 +1,11 @@
 package MIB13;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
 
-import static javax.swing.BoxLayout.*;
-
-public class MasterGUI {
-    GameHelper gameHelper;
-    Line lineArray[] = new Line[10];
-    int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
-    JButton newGameButton, ballButton[], readTippButton;
-    JPanel  lineA = new JPanel();
-
-    JPanel [] panelResultDisplay = new JPanel [10];
-    JLabel [][] labelResultDisplay = new JLabel [10][4];
-    JLabel  numberLabel, timeLabel;
-    JLabel [][]ballLabel = new JLabel[10][4];
-    ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
-    ImageIcon pin = new ImageIcon("./res/img/pin.png");
-    ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
-    ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
-
+public class MasterGUI implements ActionListener {
     public Ball ballRed = new Ball(0);
     public Ball ballMagenta = new Ball(1);
     public Ball ballYellow = new Ball(2);
@@ -41,7 +15,20 @@ public class MasterGUI {
     public Ball ballWhite = new Ball(6);
     public Ball ballBlack = new Ball(7);
     public Ball [] ballArray = new Ball [4];
-
+    GameHelper gameHelper;
+    Line lineArray[] = new Line[10];
+    int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
+    JButton newGameButton, ballButton[], readTippButton;
+    JPanel lineA = new JPanel(); //Nicht genutzt?
+    JPanel[] panelResultDisplay = new JPanel[10];
+    JLabel[][] labelResultDisplay = new JLabel[10][4];
+    JLabel numberLabel, timeLabel;
+    JLabel[][] ballLabel = new JLabel[10][4];
+    ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
+    ImageIcon pin = new ImageIcon("./res/img/pin.png");
+    ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
+    ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
+    ImageIcon backGroundImage = new ImageIcon("./res/img/backgroundtest.png"); //TODO in richtiges BG Img ändern.
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
     ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
@@ -51,8 +38,14 @@ public class MasterGUI {
     ImageIcon iconWhite = new ImageIcon(ballWhite.getImg());
     ImageIcon iconBlack = new ImageIcon(ballBlack.getImg());
 
-    private BufferedImage backgroundImage;
-
+    JMenuItem menuItemTutorial;
+    JMenuItem menuItemTipp;
+    JMenuItem menuItemAbout;
+    JMenuItem menuItemOpen;
+    JMenuItem menuItemClose;
+    JMenuBar menuBar;
+    JMenu menuHelp;
+    JMenu menuDatei;
 
     public MasterGUI(){
         Init();
@@ -61,44 +54,46 @@ public class MasterGUI {
     void Init() {
         //Am besten wäre es wohl ein Gitter zu erstellen, welches wie Folgt aufgebaut ist:
         JFrame frame = new JFrame();
+        JLabel backGroundLabel = new JLabel(backGroundImage);
         JPanel backGround = new JPanel();
         JPanel controlPanel = new JPanel();
         JPanel panelFrameControl = new JPanel(new BorderLayout());
         JPanel grid[] = new JPanel[10];
         for (int i = 0; i < 10; i++) {
             grid[i] = new JPanel();
+            grid[i].setOpaque(false);
         }
 
-        try {
-            backgroundImage = ImageIO.read(new File("./res/img/backgroundtest.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         //Frame aufbauen
         frame.setLocation(100, 100);
-        frame.setSize(350, 500);
-        frame.setMinimumSize(new Dimension(400, 650));
+        frame.setSize(400, 670);
+        //frame.setMinimumSize(new Dimension(400, 650));
+        frame.setResizable(false);
         frame.setTitle("Master Main");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //LayoutManager
-        lineA.setLayout(new FlowLayout());
+        lineA.setLayout(new FlowLayout()); //Nicht genutzt??
         backGround.setLayout(new GridLayout(10, 1));
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
 
         //Label erstellen
         for (int j = 0; j < grid.length ;j++) {
             numberLabel = new JLabel();
+            numberLabel.setOpaque(false);
             numberLabel.setSize(40,40);
             numberLabel.setText(String.valueOf(j + 1));
             panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,2));
+            panelResultDisplay[j].setOpaque(false);
 
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
                 ballLabel[j][i] = new JLabel(icon);
                 ballLabel[j][i].setSize(40, 40);
+                ballLabel[j][i].setOpaque(false);
                 labelResultDisplay[j][i] = new JLabel(pin);
                 labelResultDisplay[j][i].setSize(5, 5);
+                labelResultDisplay[j][i].setOpaque(false);
                 grid[j].add(ballLabel[j][i]);
                 panelResultDisplay[j].add(labelResultDisplay[j][i]);
 
@@ -111,8 +106,11 @@ public class MasterGUI {
         newGameButton = new JButton();
         newGameButton.setSize(300,50);
         newGameButton.setIcon(new ImageIcon("./res/img/newgame.png"));
+        newGameButton.setOpaque(false);
         newGameButton.setBackground(null);
         newGameButton.setBorderPainted(false);
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setFocusPainted(false);
         controlPanel.add(newGameButton);
 
         //Label für Zeit
@@ -126,6 +124,10 @@ public class MasterGUI {
             ballButton[i] = new JButton(icon);
             ballButton[i].setSize(50,50);
             ballButton[i].setBackground(null);
+            ballButton[i].setOpaque(false);
+            ballButton[i].setContentAreaFilled(false);
+            ballButton[i].setFocusPainted(false);
+            ballButton[i].getSize();
             //ballButton[i].setBorder(null);
             ballButton[i].setBorderPainted(false);
             ballButton[i].setLocation(325,60 + i * 50);
@@ -145,18 +147,61 @@ public class MasterGUI {
         readTippButton.setSize(100,50);
         readTippButton.setIcon(new ImageIcon("./res/img/tip.png"));
         readTippButton.setBackground(null);
+        readTippButton.setOpaque(false);
+        readTippButton.setContentAreaFilled(false);
+        readTippButton.setFocusPainted(false);
         readTippButton.setBorderPainted(false);
         controlPanel.add(readTippButton);
 
+        //MenuBar
+        menuBar = new JMenuBar();
+        menuDatei = new JMenu("Datei");
+        menuHelp = new JMenu("Hilfe");
+
+        //Datei
+        menuItemOpen = new JMenuItem("Öffnen");
+        menuItemOpen.addActionListener(this);
+        menuItemClose = new JMenuItem("Beenden");
+        menuItemClose.addActionListener(this);
+
+        //Hilfe
+        menuItemTutorial = new JMenuItem("Anleitung");
+        menuItemTutorial.addActionListener(this);
+        menuItemTipp = new JMenuItem("Tipp");
+        menuItemTipp.addActionListener(this);
+        menuItemAbout = new JMenuItem("Über");
+        menuItemAbout.addActionListener(this);
+
+        //Menüelemente zusammenfügen
+        menuBar.add(menuDatei);
+        menuBar.add(Box.createGlue());
+        menuBar.add(menuHelp);
+
+        menuDatei.add(menuItemOpen);
+        menuDatei.add(new JSeparator());
+        menuDatei.add(menuItemClose);
+        menuHelp.add(menuItemTutorial);
+        menuHelp.add(menuItemTipp);
+        menuHelp.add(menuItemAbout);
+
+        backGroundLabel.add(menuBar);
+
+        //Alles zusammenfügen
         panelFrameControl.add(backGround, BorderLayout.WEST);
         panelFrameControl.add(controlPanel, BorderLayout.EAST);
-        frame.add(panelFrameControl);
+//        frame.add(panelFrameControl);
+
+        panelFrameControl.setOpaque(false);
+        controlPanel.setOpaque(false);
+        backGround.setOpaque(false);
+        backGroundLabel.setLayout(new FlowLayout());
+        backGroundLabel.add(panelFrameControl);
+        frame.setContentPane(backGroundLabel);
+
         frame.setVisible(true);
 
-
-        //TODO menubar
+        //TODO menubar vervollständigen
         //TODO messagedialog für neues spiel wenn noch eins läuft
-        //TODO hintergrundbild
         //===================================
 
         gameHelper = new GameHelper();
@@ -332,4 +377,22 @@ public class MasterGUI {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == menuItemOpen) {
+
+        }
+        if (actionEvent.getSource() == menuItemClose) {
+            System.exit(0);
+        }
+        if (actionEvent.getSource() == menuItemTutorial) {
+
+        }
+        if (actionEvent.getSource() == menuItemTipp) {
+
+        }
+        if (actionEvent.getSource() == menuItemAbout) {
+            JOptionPane.showMessageDialog(null, "MasterMind wurde erstellt von Neil Onasch, Erik Rohkohl, Eric Sowka und Alexander Lisnitzki.", "Über", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
 }
