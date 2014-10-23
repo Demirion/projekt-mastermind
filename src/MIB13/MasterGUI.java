@@ -28,7 +28,7 @@ public class MasterGUI implements ActionListener {
     ImageIcon pin = new ImageIcon("./res/img/pin.png");
     ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
     ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
-    ImageIcon backGroundImage = new ImageIcon("./res/img/backgroundtest.png"); //TODO in richtiges BG Img ändern.
+    ImageIcon backGroundImage = new ImageIcon("./res/img/background.png");
     ImageIcon iconRed = new ImageIcon(ballRed.getImg());
     ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
     ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
@@ -53,7 +53,7 @@ public class MasterGUI implements ActionListener {
 
     void Init() {
         //Am besten wäre es wohl ein Gitter zu erstellen, welches wie Folgt aufgebaut ist:
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Mastermind");
         JLabel backGroundLabel = new JLabel(backGroundImage);
         JPanel backGround = new JPanel();
         JPanel controlPanel = new JPanel();
@@ -66,10 +66,9 @@ public class MasterGUI implements ActionListener {
 
         //Frame aufbauen
         frame.setLocation(100, 100);
-        frame.setSize(400, 670);
-        //frame.setMinimumSize(new Dimension(400, 650));
+        frame.setSize(430, 670);
+        frame.setMinimumSize(new Dimension(430, 670));
         frame.setResizable(false);
-        frame.setTitle("Master Main");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //LayoutManager
@@ -81,15 +80,17 @@ public class MasterGUI implements ActionListener {
         for (int j = 0; j < grid.length ;j++) {
             numberLabel = new JLabel();
             numberLabel.setOpaque(false);
-            numberLabel.setSize(40,40);
-            numberLabel.setText(String.valueOf(j + 1));
+            numberLabel.setSize(36, 50);
+            numberLabel.setMinimumSize(new Dimension(36, 50));
+            numberLabel.setIcon(new ImageIcon("./res/img/number"+Math.abs(j-10)+".png"));
+            //numberLabel.setText(String.valueOf(j + 1));
             panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,2));
             panelResultDisplay[j].setOpaque(false);
 
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
                 ballLabel[j][i] = new JLabel(icon);
-                ballLabel[j][i].setSize(40, 40);
+                ballLabel[j][i].setSize(50, 50);
                 ballLabel[j][i].setOpaque(false);
                 labelResultDisplay[j][i] = new JLabel(pin);
                 labelResultDisplay[j][i].setSize(5, 5);
@@ -102,9 +103,17 @@ public class MasterGUI implements ActionListener {
             backGround.add(grid[j]);
         }
 
+        //Label für Zeit
+        timeLabel = new JLabel("Zeit");
+        timeLabel.setSize(100,20);
+        timeLabel.setForeground(Color.white);
+        controlPanel.add(timeLabel);
+        
         //Neues Game Button
         newGameButton = new JButton();
-        newGameButton.setSize(300,50);
+        newGameButton.setSize(100,30);
+        newGameButton.setMinimumSize(new Dimension(100, 30));
+        newGameButton.setPreferredSize(new Dimension(100, 30));
         newGameButton.setIcon(new ImageIcon("./res/img/newgame.png"));
         newGameButton.setOpaque(false);
         newGameButton.setBackground(null);
@@ -112,11 +121,6 @@ public class MasterGUI implements ActionListener {
         newGameButton.setContentAreaFilled(false);
         newGameButton.setFocusPainted(false);
         controlPanel.add(newGameButton);
-
-        //Label für Zeit
-        timeLabel = new JLabel("Zeit");
-        timeLabel.setSize(100,100);
-        controlPanel.add(timeLabel);
 
         //Button für Ball erzeugen
         ballButton = new JButton[8];
@@ -154,10 +158,10 @@ public class MasterGUI implements ActionListener {
         controlPanel.add(readTippButton);
 
         //MenuBar
-        menuBar = new JMenuBar();
-        menuDatei = new JMenu("Datei");
-        menuHelp = new JMenu("Hilfe");
-
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menuDatei = new JMenu("Datei");
+        JMenu menuHelp = new JMenu("Hilfe");
+        
         //Datei
         menuItemOpen = new JMenuItem("Öffnen");
         menuItemOpen.addActionListener(this);
@@ -185,7 +189,9 @@ public class MasterGUI implements ActionListener {
         menuHelp.add(menuItemAbout);
 
         backGroundLabel.add(menuBar);
-
+        
+        frame.setJMenuBar(menuBar);
+        
         //Alles zusammenfügen
         panelFrameControl.add(backGround, BorderLayout.WEST);
         panelFrameControl.add(controlPanel, BorderLayout.EAST);
