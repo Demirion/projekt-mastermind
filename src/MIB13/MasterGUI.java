@@ -25,7 +25,7 @@ public class MasterGUI implements ActionListener {
     JLabel numberLabel, timeLabel;
     JLabel[][] ballLabel = new JLabel[10][4];
     ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
-    ImageIcon pin = new ImageIcon("./res/img/pin.png");
+    ImageIcon pin = new ImageIcon("./res/img/pingrey.png");
     ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
     ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
     ImageIcon backGroundImage = new ImageIcon("./res/img/background.png");
@@ -93,7 +93,7 @@ public class MasterGUI implements ActionListener {
                 ballLabel[j][i].setSize(50, 50);
                 ballLabel[j][i].setOpaque(false);
                 labelResultDisplay[j][i] = new JLabel(pin);
-                labelResultDisplay[j][i].setSize(5, 5);
+                labelResultDisplay[j][i].setSize(10, 10);
                 labelResultDisplay[j][i].setOpaque(false);
                 grid[j].add(ballLabel[j][i]);
                 panelResultDisplay[j].add(labelResultDisplay[j][i]);
