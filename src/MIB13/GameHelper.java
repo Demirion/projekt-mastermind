@@ -66,7 +66,7 @@ public class GameHelper {
      */
     public void start() {
     	Counter.count = 0;
-    	Counter mytimer = new Counter();
+    	Counter.timer.start();
         System.out.println("Spiel Start"); //TODO debug entfernen
         init();
         masterLine = new MasterLine(isMultiColors());
@@ -127,6 +127,7 @@ public class GameHelper {
      * Wenn das Spiel gewonnen ist, werden "Highscore" berechnet und das Spiel auf nicht laufend gesetzt.
      */
     public void gameWon() {
+    	Counter.timer.stop();
         System.out.println("Gewonnen!"); //Debug
         gameIsRunning = false;
         int time = 0; //TODO durch richtige Zeit ersetzen
