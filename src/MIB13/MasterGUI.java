@@ -58,6 +58,7 @@ public class MasterGUI {
     public Ball ballBlack = new Ball(7);
     ButtonActionListener listener = new ButtonActionListener();
     MenuActionListener menuListener = new MenuActionListener();
+    Counter counter = new Counter();
 
     public MasterGUI() {
         Init();
