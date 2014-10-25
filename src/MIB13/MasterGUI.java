@@ -12,7 +12,7 @@ public class MasterGUI {
     public static GameHelper gameHelper;
     public static Line lineArray[] = new Line[10];
     public static int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
-    public static JButton newGameButton, ballButton[], readTippButton, musicButton;
+    public static JButton newGameButton, ballButton[], readTippButton, musicButton, screenButton;
     public static JPanel lineA = new JPanel(); //Nicht genutzt?
     public static JPanel[] panelResultDisplay = new JPanel[10];
     public static JLabel[][] labelResultDisplay = new JLabel[10][4];
@@ -22,7 +22,7 @@ public class MasterGUI {
     public static ImageIcon pin = new ImageIcon("./res/img/pingrey.png");
     public static ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
     public static ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
-    public static ImageIcon backGroundImage = new ImageIcon("./res/img/background.png");
+    public static ImageIcon backGroundImage = new ImageIcon("./res/img/background0.png");
     public static ImageIcon iconRed = new ImageIcon(("./res/img/Rot.png"));
     public static ImageIcon iconGreen = new ImageIcon(("./res/img/Grün.png"));
     public static ImageIcon iconMagenta = new ImageIcon("./res/img/Magenta.png");
@@ -45,6 +45,7 @@ public class MasterGUI {
     public static JMenu menuDatei;
     public static JMenu menuOption;
     public static boolean musicplaying = false;
+    public static int activeBG = 0;
     public static File audioFile = new File("./res/snd/music.wav");
     public static AudioClip player = null;
     public Ball ballRed = new Ball(0);
@@ -73,10 +74,11 @@ public class MasterGUI {
 
     void Init() {
         //Am besten wäre es wohl ein Gitter zu erstellen, welches wie Folgt aufgebaut ist:
-        JFrame frame = new JFrame("Mastermind");
+        JFrame frame = new JFrame("MasterMind");
         JLabel backGroundLabel = new JLabel(backGroundImage);
         JPanel backGround = new JPanel();
         JPanel controlPanel = new JPanel();
+        JPanel mediaPanel = new JPanel();
         JPanel panelFrameControl = new JPanel(new BorderLayout());
         JPanel grid[] = new JPanel[10];
         for (int i = 0; i < 10; i++) {
@@ -95,6 +97,12 @@ public class MasterGUI {
         lineA.setLayout(new FlowLayout()); //Nicht genutzt??
         backGround.setLayout(new GridLayout(10, 1));
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        //mediaPanel.setLayout(new BoxLayout(mediaPanel, BoxLayout.X_AXIS));
+        mediaPanel.setMinimumSize(new Dimension(5,5));
+        mediaPanel.setSize(new Dimension(5,5));
+        mediaPanel.setPreferredSize(new Dimension(5,5));
+        mediaPanel.setOpaque(false);
+        
 
         //Label erstellen
         for (int j = 0; j < grid.length; j++) {
@@ -180,13 +188,21 @@ public class MasterGUI {
         readTippButton.addActionListener(listener);
         controlPanel.add(readTippButton);
 
-
+        controlPanel.add(mediaPanel);
+        
         //music button
-        musicButton = new JButton("musictest");
+        musicButton = new JButton();
         musicButton.setSize(30, 30);
-        musicButton.setForeground(Color.white);
+        musicButton.setPreferredSize(new Dimension(30, 30));
+        musicButton.setMinimumSize(new Dimension(30,30));
+        musicButton.setIcon(new ImageIcon("./res/img/audio_off.png"));
+        musicButton.setBackground(null);
+        musicButton.setOpaque(false);
+        musicButton.setContentAreaFilled(false);
+        musicButton.setFocusPainted(false);
+        musicButton.setBorderPainted(false);
         musicButton.addActionListener(listener);
-        controlPanel.add(musicButton);
+        mediaPanel.add(musicButton);
 
         //Music Player
         try {
@@ -195,7 +211,20 @@ public class MasterGUI {
             e1.printStackTrace();
             System.out.println("Audiodatei nicht gefunden.");
         }
-
+        
+        //screenButton
+        screenButton = new JButton();
+        screenButton.setSize(30,30);
+        screenButton.setPreferredSize(new Dimension(30,30));
+        screenButton.setMinimumSize(new Dimension(30,30));
+        screenButton.setIcon(new ImageIcon("./res/img/screen_button.png"));
+        screenButton.setBackground(null);
+        screenButton.setOpaque(false);
+        screenButton.setContentAreaFilled(false);
+        screenButton.setFocusPainted(false);
+        screenButton.setBorderPainted(false);
+        screenButton.addActionListener(listener);
+        mediaPanel.add(screenButton);
 
         //MenuBar
         JMenuBar menuBar = new JMenuBar();

@@ -1,6 +1,7 @@
 package MIB13;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -155,10 +156,21 @@ public class ButtonActionListener  implements ActionListener{
             if (!MasterGUI.musicplaying) {
                 MasterGUI.player.loop();
                 MasterGUI.musicplaying = true;
+                MasterGUI.musicButton.setIcon(new ImageIcon("./res/img/audio_on.png"));
             } else {
                 MasterGUI.player.stop();
                 MasterGUI.musicplaying = false;
+                MasterGUI.musicButton.setIcon(new ImageIcon("./res/img/audio_off.png"));
             }
+        }
+        
+        if (e.getSource() == MasterGUI.screenButton) {
+        	if ((MasterGUI.activeBG + 1) <= 8) {
+        		
+        	} else {
+        		
+        	}
+        	
         }
 
 
