@@ -44,9 +44,11 @@ public class MenuActionListener implements ActionListener {
         }
         if (e.getSource() == MasterGUI.menuItemMultiColorOn){
             MasterGUI.gameHelper.setMultiColors(true);
+            MasterGUI.gameHelper.start();
         }
         if (e.getSource() == MasterGUI.menuItemMultiColorOff){
             MasterGUI.gameHelper.setMultiColors(false);
+            MasterGUI.gameHelper.start();
         }
 
     }

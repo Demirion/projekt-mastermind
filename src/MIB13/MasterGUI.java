@@ -228,7 +228,7 @@ public class MasterGUI  {
         frame.setVisible(true);
 
         gameHelper = new GameHelper();
-        gameHelper.setMultiColors(false);
+        //gameHelper.setMultiColors(false);
         gameHelper.start();
 
     }

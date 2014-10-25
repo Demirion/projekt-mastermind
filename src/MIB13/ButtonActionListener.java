@@ -9,9 +9,9 @@ public class ButtonActionListener  implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == MasterGUI.ballButton[0]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconRed);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(1);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.RED);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -19,18 +19,18 @@ public class ButtonActionListener  implements ActionListener{
         }
 
         if (e.getSource() == MasterGUI.ballButton[1]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconMagenta);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(2);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.MAGENTA);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
             }
         }
         if (e.getSource() == MasterGUI.ballButton[2]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconYellow);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(2);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.YELLOW);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -39,9 +39,9 @@ public class ButtonActionListener  implements ActionListener{
 
 
         if (e.getSource() == MasterGUI.ballButton[3]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconGreen);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(3);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.GREEN);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -49,9 +49,9 @@ public class ButtonActionListener  implements ActionListener{
         }
 
         if (e.getSource() == MasterGUI.ballButton[4]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconBlue);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(4);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.BLUE);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -59,9 +59,9 @@ public class ButtonActionListener  implements ActionListener{
         }
 
         if (e.getSource() == MasterGUI.ballButton[5]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconCyan);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(5);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.CYAN);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -69,18 +69,18 @@ public class ButtonActionListener  implements ActionListener{
         }
 
         if (e.getSource() == MasterGUI.ballButton[6]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconWhite);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(6);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.WHITE);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
             }
         }
         if (e.getSource() == MasterGUI.ballButton[7]) {
-            if (MasterGUI.anzahlFarbWahlen < 4) {
+            if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE && MasterGUI.gameHelper.gameIsRunning()) {
                 MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconBlack);
-                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(7);
+                MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.BLACK);
                 MasterGUI.anzahlFarbWahlen++;
             }else{
                 JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
