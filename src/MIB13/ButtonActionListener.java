@@ -87,20 +87,21 @@ public class ButtonActionListener  implements ActionListener{
             }
         }
         if (e.getSource() == MasterGUI.readTippButton){
-            if (MasterGUI.anzahlFarbWahlen > 3) {
+            if (MasterGUI.anzahlFarbWahlen >= GameHelper.LINESIZE) {
                 MasterGUI.lineArray[MasterGUI.derzeitigeRunde] = new Line(MasterGUI.ballArray[0], MasterGUI.ballArray[1], MasterGUI.ballArray[2], MasterGUI.ballArray[3]);
                 MasterGUI.anzahlFarbWahlen = 0;
 
-                int[] anzSticks = new int[2];
+                int[] anzSticks;
                 anzSticks = MasterGUI.gameHelper.checkLine(MasterGUI.gameHelper.getMasterLine(), MasterGUI.lineArray[MasterGUI.derzeitigeRunde]);
-                System.out.println(anzSticks[0] + " " + anzSticks[1]);
+                System.out.println(anzSticks[0] + " " + anzSticks[1]); //TODO debug entfernen vor release
                 int k = 0;
-                for (int i = anzSticks[0]; i > 0; i--) {
-                    MasterGUI.labelResultDisplay[9 - MasterGUI.derzeitigeRunde][k].setIcon(MasterGUI.pinBlack);
-                    k++;
-                }
                 for (int i = anzSticks[1]; i > 0; i--) {
                     MasterGUI.labelResultDisplay[9 - MasterGUI.derzeitigeRunde][k].setIcon(MasterGUI.pinWhite);
+                    k++;
+                }
+                k = 0;
+                for (int i = anzSticks[0]; i > 0; i--) {
+                    MasterGUI.labelResultDisplay[9 - MasterGUI.derzeitigeRunde][k].setIcon(MasterGUI.pinBlack);
                     k++;
                 }
                 MasterGUI.derzeitigeRunde++;

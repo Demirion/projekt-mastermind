@@ -27,10 +27,10 @@ public class TestDriverNeil {
         //Checkline Test
         GameHelper helper = new GameHelper();
         int sticks[];
-        Ball mA = new Ball(Ball.RED);
-        Ball mB = new Ball(Ball.CYAN);
+        Ball mA = new Ball(Ball.WHITE);
+        Ball mB = new Ball(Ball.WHITE);
         Ball mC = new Ball(Ball.BLACK);
-        Ball mD = new Ball(Ball.BLUE);
+        Ball mD = new Ball(Ball.WHITE);
         MasterLine winLine = new MasterLine(false);
         winLine.addBall(mA);
         winLine.addBall(mB);
@@ -99,8 +99,34 @@ public class TestDriverNeil {
         System.out.println();
         MasterLine neueMasterLine = new MasterLine(false);
 
+        //Checkline Multicolor test
+        System.out.println("Multiline test\n");
+
+        MasterLine multiMaster = new MasterLine(true);
+        multiMaster.removeLastBall();
+        multiMaster.removeLastBall();
+        multiMaster.removeLastBall();
+        multiMaster.removeLastBall();
+        multiMaster.addBall(new Ball(Ball.WHITE));
+        multiMaster.addBall(new Ball(Ball.WHITE));
+        multiMaster.addBall(new Ball(Ball.BLACK));
+        multiMaster.addBall(new Ball(Ball.WHITE));
+
+        Line multiLine = new Line();
+        multiLine.addBall(new Ball(Ball.WHITE));
+        multiLine.addBall(new Ball(Ball.BLACK));
+        multiLine.addBall(new Ball(Ball.WHITE));
+        multiLine.addBall(new Ball(Ball.WHITE));
+
+        int multicheck[] = helper.checkLine(multiMaster, multiLine);
+        System.out.println("Multicheck: " + multicheck[0] + " | " + multicheck[1]);
+
+
         //Gui angucken :)
         MasterGUI gui = new MasterGUI();
+
+        //MasterGUI.gameHelper.setMasterLine(multiMaster);
+
 
     }
 }

@@ -2,8 +2,6 @@ package MIB13;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MasterGUI  {
     public Ball ballRed = new Ball(0);
@@ -230,8 +228,8 @@ public class MasterGUI  {
         frame.setVisible(true);
 
         gameHelper = new GameHelper();
-        gameHelper.start();
         gameHelper.setMultiColors(false);
+        gameHelper.start();
 
     }
     public static void repaint(){

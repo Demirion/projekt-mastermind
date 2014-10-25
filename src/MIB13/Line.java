@@ -44,7 +44,7 @@ public class Line {
      */
     public void removeLastBall() {
         if (balls.size() > 0)
-            balls.remove(balls.size());
+            balls.remove(balls.size() - 1);
         else System.out.println("Vektor bereits leer.");
     }
 

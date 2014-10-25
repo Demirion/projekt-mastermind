@@ -49,7 +49,11 @@ public class GameHelper {
 
     }
 
-        /**
+    public void setMasterLine(MasterLine masterLine) {
+        this.masterLine = masterLine;
+    }
+
+    /**
          * Spielstart.
          * TODO Es soll überprüft werden, ob die Multicolors option gesetzt wurde und danach
          * eine MasterLine mit dem Argument multiColors erstellt werden.
@@ -59,7 +63,8 @@ public class GameHelper {
         masterLine = new MasterLine(isMultiColors());
         gameIsRunning = true;
 
-    }
+
+        }
 
         /**
          * Methode zum vergleichen der derzeitigen Zeile mit der MasterLine.
