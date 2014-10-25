@@ -1,8 +1,16 @@
 package MIB13;
 
 import javax.swing.*;
+
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 
 public class ButtonActionListener  implements ActionListener{
@@ -131,6 +139,29 @@ public class ButtonActionListener  implements ActionListener{
             }
 
         } //newGameButton
+        
+        /*
+        if (e.getSource() == MasterGUI.musicButton){
+        	AudioPlayer ap = AudioPlayer.player;
+        	AudioStream stream;
+        	AudioData data;
+        	ContinuousAudioDataStream loop = null;
+        	if(MasterGUI.musicplaying == false) {
+        		MasterGUI.musicplaying = true;
+        		try{
+        			stream = new AudioStream(new FileInputStream("./music.wav"));
+        			data = stream.getData();
+        			loop = new ContinuousAudioDataStream(data);
+        		} catch(IOException error) {}
+        			ap.start(loop);
+        	} else {
+        		//hier soll der scheiß wieder geschlossen werden.. also stumm, stream aus und so
+        		MasterGUI.musicplaying = false;
+        	}
+        	
+        }
+        */
+        
 
     }
 }

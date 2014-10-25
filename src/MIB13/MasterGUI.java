@@ -16,7 +16,7 @@ public class MasterGUI {
     public static GameHelper gameHelper;
     public static Line lineArray[] = new Line[10];
     public static int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
-    public static JButton newGameButton, ballButton[], readTippButton;
+    public static JButton newGameButton, ballButton[], readTippButton, musicButton;
     public static JPanel lineA = new JPanel(); //Nicht genutzt?
     public static JPanel[] panelResultDisplay = new JPanel[10];
     public static JLabel[][] labelResultDisplay = new JLabel[10][4];
@@ -49,6 +49,8 @@ public class MasterGUI {
     public static JMenu menuHelp;
     public static JMenu menuDatei;
     public static JMenu menuOption;
+    
+    public static boolean musicplaying = false;
 
     ButtonActionListener listener = new ButtonActionListener();
     MenuActionListener menuListener = new MenuActionListener();
@@ -165,6 +167,15 @@ public class MasterGUI {
         readTippButton.setBorderPainted(false);
         readTippButton.addActionListener(listener);
         controlPanel.add(readTippButton);
+        
+        /*
+        //music button
+        musicButton = new JButton("musictest");
+        musicButton.setSize(30, 30);
+        musicButton.setForeground(Color.white);
+        musicButton.addActionListener(listener);
+        controlPanel.add(musicButton);
+        */
 
         //MenuBar
         JMenuBar menuBar = new JMenuBar();
