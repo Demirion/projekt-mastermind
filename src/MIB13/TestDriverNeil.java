@@ -124,9 +124,7 @@ public class TestDriverNeil {
 
         //Gui angucken :)
         MasterGUI gui = new MasterGUI();
-
         //MasterGUI.gameHelper.setMasterLine(multiMaster);
-
 
     }
 }

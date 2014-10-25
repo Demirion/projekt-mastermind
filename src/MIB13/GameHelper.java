@@ -1,7 +1,7 @@
 package MIB13;
 
+import javax.swing.*;
 import java.util.Random;
-import java.util.Vector;
 
 /**
  * Created by niiru on 17.10.14.
@@ -11,9 +11,10 @@ import java.util.Vector;
 public class GameHelper {
 
     public final static int LINESIZE = 4;
+    public final static int MAXROUNDS = 10;
     private boolean multiColors = false; //Option zum einstellen der Mehrfachfarbauswahl
-    private boolean gameIsRunning = true; //TODO Auf false setzen!!
-    private int round = 0;
+    private boolean gameIsRunning = false;
+    private int round = 0; //Wird auch in der MasterGUI gehandhabt..
     private MasterLine masterLine;
     //private int sticks[] = new int[2]; //[0] = black; [1] = white;
 
@@ -81,7 +82,6 @@ public class GameHelper {
      */
     public int[] checkLine(MasterLine masterLine, Line line) { //Fertig(?)
         int sticks[] = new int[2];
-        Vector<Ball> ballVector = new Vector<Ball>();
         int mLine[] = new int[GameHelper.LINESIZE];
         int cLine[] = new int[GameHelper.LINESIZE];
 
@@ -91,7 +91,7 @@ public class GameHelper {
             for (int i = 0; i < GameHelper.LINESIZE; i++) {
                 mLine[i] = masterLine.getBall(i).getColor();
                 cLine[i] = line.getBall(i).getColor();
-                //System.out.println("mLine : cLine = "+mLine[i]+" : "+cLine[i]); //debug
+                System.out.println("mLine : cLine = " + mLine[i] + " : " + cLine[i]); //debug
             }
 
 
@@ -110,6 +110,10 @@ public class GameHelper {
             }
             if (sticks[0] == 4) gameWon();
             round++;
+            if (round == MAXROUNDS) {
+                System.out.println("Maximale Runden erreicht. Spielende.");
+                gameIsRunning = false;
+            }
         }
         return sticks;
     }
@@ -119,8 +123,10 @@ public class GameHelper {
      */
     public void gameWon() {
         System.out.println("Gewonnen!"); //Debug
-
         gameIsRunning = false;
+        int time = 0; //TODO durch richtige Zeit ersetzen
+        int score = 0; //TODO score berechnen
+        JOptionPane.showConfirmDialog(null, "Herzlichen Glückwunsch! Sie sind das Mastermind.\n\n\nBenötigte Zeit: " + time + " Sekunden.\nBenötigte Runden: " + (MasterGUI.derzeitigeRunde + 1) + "\nScore: " + score + " Punkte.", "Gewonnen!", JOptionPane.DEFAULT_OPTION);
     }
 
     /**
@@ -131,8 +137,6 @@ public class GameHelper {
      * @return String mit einem Lösungsansatz.
      */
     public String getHelp(MasterLine masterLine, Line currentLine) {
-        int counter[] = new int[masterLine.getBalls().size()]; //für jede SPALTE
-        //int linesWithBlacks[] = new int[lineArray[0].getBalls().size()]; //die Spalten selbst
 
         String retString = "";
         int blackWhites[]; //sticks, nur halt für diese Funktion

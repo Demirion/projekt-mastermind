@@ -3,7 +3,7 @@ package MIB13;
 import javax.swing.*;
 import java.awt.*;
 
-public class MasterGUI  {
+public class MasterGUI {
     public Ball ballRed = new Ball(0);
     public Ball ballMagenta = new Ball(1);
     public Ball ballYellow = new Ball(2);
@@ -12,7 +12,7 @@ public class MasterGUI  {
     public Ball ballCyan = new Ball(5);
     public Ball ballWhite = new Ball(6);
     public Ball ballBlack = new Ball(7);
-    public static Ball [] ballArray = new Ball [4];
+    public static Ball[] ballArray = new Ball[4];
     public static GameHelper gameHelper;
     public static Line lineArray[] = new Line[10];
     public static int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
@@ -29,7 +29,7 @@ public class MasterGUI  {
     public static ImageIcon backGroundImage = new ImageIcon("./res/img/background.png");
     public static ImageIcon iconRed = new ImageIcon(("./res/img/Rot.png"));
     public static ImageIcon iconGreen = new ImageIcon(("./res/img/Grün.png"));
-    public static  ImageIcon iconMagenta = new ImageIcon("./res/img/Magenta.png");
+    public static ImageIcon iconMagenta = new ImageIcon("./res/img/Magenta.png");
     public static ImageIcon iconYellow = new ImageIcon("./res/img/Gelb.png");
     public static ImageIcon iconCyan = new ImageIcon(("./res/img/Cyan.png"));
     public static ImageIcon iconBlue = new ImageIcon(("./res/img/Blau.png"));
@@ -53,7 +53,7 @@ public class MasterGUI  {
     ButtonActionListener listener = new ButtonActionListener();
     MenuActionListener menuListener = new MenuActionListener();
 
-    public MasterGUI(){
+    public MasterGUI() {
         Init();
     }
 
@@ -83,14 +83,14 @@ public class MasterGUI  {
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
 
         //Label erstellen
-        for (int j = 0; j < grid.length ;j++) {
+        for (int j = 0; j < grid.length; j++) {
             numberLabel = new JLabel();
             numberLabel.setOpaque(false);
             numberLabel.setSize(36, 50);
             numberLabel.setMinimumSize(new Dimension(36, 50));
-            numberLabel.setIcon(new ImageIcon("./res/img/number"+Math.abs(j-10)+".png"));
+            numberLabel.setIcon(new ImageIcon("./res/img/number" + Math.abs(j - 10) + ".png"));
             //numberLabel.setText(String.valueOf(j + 1));
-            panelResultDisplay[j] = new JPanel(new GridLayout(2,2,2,2));
+            panelResultDisplay[j] = new JPanel(new GridLayout(2, 2, 2, 2));
             panelResultDisplay[j].setOpaque(false);
 
             grid[j].add(numberLabel);
@@ -111,13 +111,13 @@ public class MasterGUI  {
 
         //Label für Zeit
         timeLabel = new JLabel("Zeit");
-        timeLabel.setSize(100,20);
+        timeLabel.setSize(100, 20);
         timeLabel.setForeground(Color.white);
         controlPanel.add(timeLabel);
-        
+
         //Neues Game Button
         newGameButton = new JButton();
-        newGameButton.setSize(100,30);
+        newGameButton.setSize(100, 30);
         newGameButton.setMinimumSize(new Dimension(100, 30));
         newGameButton.setPreferredSize(new Dimension(100, 30));
         newGameButton.setIcon(new ImageIcon("./res/img/newgame.png"));
@@ -131,9 +131,9 @@ public class MasterGUI  {
 
         //Button für Ball erzeugen
         ballButton = new JButton[8];
-        for (int i = 0; i < ballButton.length; i++){
+        for (int i = 0; i < ballButton.length; i++) {
             ballButton[i] = new JButton(icon);
-            ballButton[i].setSize(50,50);
+            ballButton[i].setSize(50, 50);
             ballButton[i].setBackground(null);
             ballButton[i].setOpaque(false);
             ballButton[i].setContentAreaFilled(false);
@@ -156,7 +156,7 @@ public class MasterGUI  {
 
         //Button um Tipp abzugeben
         readTippButton = new JButton();
-        readTippButton.setSize(100,50);
+        readTippButton.setSize(100, 50);
         readTippButton.setIcon(new ImageIcon("./res/img/tip.png"));
         readTippButton.setBackground(null);
         readTippButton.setOpaque(false);
@@ -171,7 +171,7 @@ public class MasterGUI  {
         JMenu menuDatei = new JMenu("Datei");
         JMenu menuHelp = new JMenu("Hilfe");
         JMenu menuOption = new JMenu("Optionen");
-        
+
         //Datei
         menuItemOpen = new JMenuItem("Öffnen");
         menuItemOpen.addActionListener(menuListener);
@@ -215,7 +215,7 @@ public class MasterGUI  {
 
         backGroundLabel.add(menuBar);
         frame.setJMenuBar(menuBar);
-        
+
         //Alles zusammenfügen
         panelFrameControl.add(backGround, BorderLayout.WEST);
         panelFrameControl.add(controlPanel, BorderLayout.EAST);
@@ -228,15 +228,14 @@ public class MasterGUI  {
         frame.setVisible(true);
 
         gameHelper = new GameHelper();
-        //gameHelper.setMultiColors(false);
-        gameHelper.start();
 
     }
-    public static void repaint(){
-        for (int i = 0; i < 10; i++){
-            for (int j = 0; j < 4; j++){
-               ballLabel[i][j].setIcon(icon);
-               labelResultDisplay[i][j].setIcon(pin);
+
+    public static void repaint() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                ballLabel[i][j].setIcon(icon);
+                labelResultDisplay[i][j].setIcon(pin);
             }
         }
     }
