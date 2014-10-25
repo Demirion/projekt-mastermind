@@ -37,12 +37,12 @@ public class TestDriverNeil {
         winLine.addBall(mC);
         winLine.addBall(mD);
 
-        System.out.println("lineA: "+lineA.getBall(0).getColor()+lineA.getBall(1).getColor()+lineA.getBall(2).getColor()+lineA.getBall(3).getColor());
-        System.out.println("winLine: "+winLine.getBall(0).getColor()+winLine.getBall(1).getColor()+winLine.getBall(2).getColor()+winLine.getBall(3).getColor());
+        System.out.println("lineA: " + lineA.getBall(0).getColor() + lineA.getBall(1).getColor() + lineA.getBall(2).getColor() + lineA.getBall(3).getColor());
+        System.out.println("winLine: " + winLine.getBall(0).getColor() + winLine.getBall(1).getColor() + winLine.getBall(2).getColor() + winLine.getBall(3).getColor());
 
         helper.init();
         sticks = helper.checkLine(winLine, lineA);
-        System.out.println("white black "+ sticks[0]+ " "+sticks[1]); //debug
+        System.out.println("white black " + sticks[0] + " " + sticks[1]); //debug
 
         //Help Test
         Line lineArray[] = new Line[4];
@@ -130,13 +130,3 @@ public class TestDriverNeil {
 
     }
 }
-
-/**
- * Was es zu sagen gibt:
- * Absolute Pfade gehen mal gar nicht!!
- * Wir brauchen ein Hintergrundbild != Grau
- * extends GameGUISKIZZE. Warum??
- * Nicht alle Dateien hochladen!! Nur source und resource files.
- * EriC braucht die Größenangaben / Relationen
- * Ansonsten, sehr hübsch!
- */

@@ -88,14 +88,12 @@ public class GameHelper {
         if (gameIsRunning) {
             sticks[0] = sticks[1] = 0;
 
-            /*
-            System.out.println("DEBUG");
             for (int i = 0; i < GameHelper.LINESIZE; i++) {
                 mLine[i] = masterLine.getBall(i).getColor();
                 cLine[i] = line.getBall(i).getColor();
-                System.out.println("mLine : cLine = "+mLine[i]+" : "+cLine[i]);
+                //System.out.println("mLine : cLine = "+mLine[i]+" : "+cLine[i]); //debug
             }
-            */
+
 
             for (int i = 0; i < masterLine.getBalls().size(); i++) {
                 if (masterLine.getBall(i).getColor() == line.getBall(i).getColor()) {
@@ -139,6 +137,7 @@ public class GameHelper {
         String retString = "";
         int blackWhites[]; //sticks, nur halt für diese Funktion
         blackWhites = checkLine(masterLine, currentLine);
+        blackWhites[1] = blackWhites[1] - blackWhites[0];
 
         if (blackWhites[1] == 0) {
             //0 Weiße
