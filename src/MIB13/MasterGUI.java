@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MasterGUI implements ActionListener {
+public class MasterGUI  {
     public Ball ballRed = new Ball(0);
     public Ball ballMagenta = new Ball(1);
     public Ball ballYellow = new Ball(2);
@@ -14,38 +14,46 @@ public class MasterGUI implements ActionListener {
     public Ball ballCyan = new Ball(5);
     public Ball ballWhite = new Ball(6);
     public Ball ballBlack = new Ball(7);
-    public Ball [] ballArray = new Ball [4];
-    GameHelper gameHelper;
-    Line lineArray[] = new Line[10];
-    int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
-    JButton newGameButton, ballButton[], readTippButton;
-    JPanel lineA = new JPanel(); //Nicht genutzt?
-    JPanel[] panelResultDisplay = new JPanel[10];
-    JLabel[][] labelResultDisplay = new JLabel[10][4];
-    JLabel numberLabel, timeLabel;
-    JLabel[][] ballLabel = new JLabel[10][4];
-    ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
-    ImageIcon pin = new ImageIcon("./res/img/pingrey.png");
-    ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
-    ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
-    ImageIcon backGroundImage = new ImageIcon("./res/img/background.png");
-    ImageIcon iconRed = new ImageIcon(ballRed.getImg());
-    ImageIcon iconGreen = new ImageIcon(ballGreen.getImg());
-    ImageIcon iconMagenta = new ImageIcon(ballMagenta.getImg());
-    ImageIcon iconYellow = new ImageIcon(ballYellow.getImg());
-    ImageIcon iconCyan = new ImageIcon(ballCyan.getImg());
-    ImageIcon iconBlue = new ImageIcon(ballBlue.getImg());
-    ImageIcon iconWhite = new ImageIcon(ballWhite.getImg());
-    ImageIcon iconBlack = new ImageIcon(ballBlack.getImg());
+    public static Ball [] ballArray = new Ball [4];
+    public static GameHelper gameHelper;
+    public static Line lineArray[] = new Line[10];
+    public static int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
+    public static JButton newGameButton, ballButton[], readTippButton;
+    public static JPanel lineA = new JPanel(); //Nicht genutzt?
+    public static JPanel[] panelResultDisplay = new JPanel[10];
+    public static JLabel[][] labelResultDisplay = new JLabel[10][4];
+    public static JLabel numberLabel, timeLabel;
+    public static JLabel[][] ballLabel = new JLabel[10][4];
+    public static ImageIcon icon = new ImageIcon("./res/img/Farblos.png");
+    public static ImageIcon pin = new ImageIcon("./res/img/pingrey.png");
+    public static ImageIcon pinWhite = new ImageIcon("./res/img/pinWhite.png");
+    public static ImageIcon pinBlack = new ImageIcon("./res/img/pinBlack.png");
+    public static ImageIcon backGroundImage = new ImageIcon("./res/img/background.png");
+    public static ImageIcon iconRed = new ImageIcon(("./res/img/Rot.png"));
+    public static ImageIcon iconGreen = new ImageIcon(("./res/img/Grün.png"));
+    public static  ImageIcon iconMagenta = new ImageIcon("./res/img/Magenta.png");
+    public static ImageIcon iconYellow = new ImageIcon("./res/img/Gelb.png");
+    public static ImageIcon iconCyan = new ImageIcon(("./res/img/Cyan.png"));
+    public static ImageIcon iconBlue = new ImageIcon(("./res/img/Blau.png"));
+    public static ImageIcon iconWhite = new ImageIcon(("./res/img/Weiß.png"));
+    public static ImageIcon iconBlack = new ImageIcon(("./res/img/Schwarz.png"));
 
-    JMenuItem menuItemTutorial;
-    JMenuItem menuItemTipp;
-    JMenuItem menuItemAbout;
-    JMenuItem menuItemOpen;
-    JMenuItem menuItemClose;
-    JMenuBar menuBar;
-    JMenu menuHelp;
-    JMenu menuDatei;
+    public static JMenuItem menuItemTutorial;
+    public static JMenuItem menuItemTipp;
+    public static JMenuItem menuItemAbout;
+    public static JMenuItem menuItemOpen;
+    public static JMenuItem menuItemClose;
+    public static JMenuItem menuItemNewGame;
+    public static JMenu menuItemGameModi;
+    public static JMenuItem menuItemMultiColorOn;
+    public static JMenuItem menuItemMultiColorOff;
+    public static JMenuBar menuBar;
+    public static JMenu menuHelp;
+    public static JMenu menuDatei;
+    public static JMenu menuOption;
+
+    ButtonActionListener listener = new ButtonActionListener();
+    MenuActionListener menuListener = new MenuActionListener();
 
     public MasterGUI(){
         Init();
@@ -93,7 +101,7 @@ public class MasterGUI implements ActionListener {
                 ballLabel[j][i].setSize(50, 50);
                 ballLabel[j][i].setOpaque(false);
                 labelResultDisplay[j][i] = new JLabel(pin);
-                labelResultDisplay[j][i].setSize(10, 10);
+                labelResultDisplay[j][i].setSize(5, 5);
                 labelResultDisplay[j][i].setOpaque(false);
                 grid[j].add(ballLabel[j][i]);
                 panelResultDisplay[j].add(labelResultDisplay[j][i]);
@@ -120,6 +128,7 @@ public class MasterGUI implements ActionListener {
         newGameButton.setBorderPainted(false);
         newGameButton.setContentAreaFilled(false);
         newGameButton.setFocusPainted(false);
+        newGameButton.addActionListener(listener);
         controlPanel.add(newGameButton);
 
         //Button für Ball erzeugen
@@ -134,7 +143,8 @@ public class MasterGUI implements ActionListener {
             ballButton[i].getSize();
             //ballButton[i].setBorder(null);
             ballButton[i].setBorderPainted(false);
-            ballButton[i].setLocation(325,60 + i * 50);
+            ballButton[i].setLocation(325, 60 + i * 50);
+            ballButton[i].addActionListener(listener);
             controlPanel.add(ballButton[i]);
         }
         ballButton[0].setIcon(iconRed);
@@ -155,29 +165,44 @@ public class MasterGUI implements ActionListener {
         readTippButton.setContentAreaFilled(false);
         readTippButton.setFocusPainted(false);
         readTippButton.setBorderPainted(false);
+        readTippButton.addActionListener(listener);
         controlPanel.add(readTippButton);
 
         //MenuBar
         JMenuBar menuBar = new JMenuBar();
         JMenu menuDatei = new JMenu("Datei");
         JMenu menuHelp = new JMenu("Hilfe");
+        JMenu menuOption = new JMenu("Optionen");
         
         //Datei
         menuItemOpen = new JMenuItem("Öffnen");
-        menuItemOpen.addActionListener(this);
+        menuItemOpen.addActionListener(menuListener);
         menuItemClose = new JMenuItem("Beenden");
-        menuItemClose.addActionListener(this);
+        menuItemClose.addActionListener(menuListener);
 
         //Hilfe
         menuItemTutorial = new JMenuItem("Anleitung");
-        menuItemTutorial.addActionListener(this);
+        menuItemTutorial.addActionListener(menuListener);
         menuItemTipp = new JMenuItem("Tipp");
-        menuItemTipp.addActionListener(this);
+        menuItemTipp.addActionListener(menuListener);
         menuItemAbout = new JMenuItem("Über");
-        menuItemAbout.addActionListener(this);
+        menuItemAbout.addActionListener(menuListener);
+
+        //Optionen
+        menuItemNewGame = new JMenuItem("Neues Spiel");
+        menuItemGameModi = new JMenu("Spielmodus");
+        menuItemMultiColorOff = new JMenuItem("Multicolor OFF");
+        menuItemMultiColorOn = new JMenuItem("Multicolor ON");
+        menuItemGameModi.addActionListener(menuListener);
+        menuItemNewGame.addActionListener(menuListener);
+        menuItemMultiColorOff.addActionListener(menuListener);
+        menuItemMultiColorOn.addActionListener(menuListener);
 
         //Menüelemente zusammenfügen
+        menuItemGameModi.add(menuItemMultiColorOff);
+        menuItemGameModi.add(menuItemMultiColorOn);
         menuBar.add(menuDatei);
+        menuBar.add(menuOption);
         menuBar.add(Box.createGlue());
         menuBar.add(menuHelp);
 
@@ -187,218 +212,34 @@ public class MasterGUI implements ActionListener {
         menuHelp.add(menuItemTutorial);
         menuHelp.add(menuItemTipp);
         menuHelp.add(menuItemAbout);
+        menuOption.add(menuItemNewGame);
+        menuOption.add(menuItemGameModi);
 
         backGroundLabel.add(menuBar);
-        
         frame.setJMenuBar(menuBar);
         
         //Alles zusammenfügen
         panelFrameControl.add(backGround, BorderLayout.WEST);
         panelFrameControl.add(controlPanel, BorderLayout.EAST);
-//        frame.add(panelFrameControl);
-
         panelFrameControl.setOpaque(false);
         controlPanel.setOpaque(false);
         backGround.setOpaque(false);
         backGroundLabel.setLayout(new FlowLayout());
         backGroundLabel.add(panelFrameControl);
         frame.setContentPane(backGroundLabel);
-
         frame.setVisible(true);
-
-        //TODO menubar vervollständigen
-        //TODO messagedialog für neues spiel wenn noch eins läuft
-        //===================================
 
         gameHelper = new GameHelper();
         gameHelper.start();
         gameHelper.setMultiColors(false);
-        //==================================
-
-        //ActionListener
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (gameHelper.gameIsRunning()) {
-                    //Am besten ein Pop-Up Fenster
-                    System.out.println("Wirklich neustarten??");
-
-                    //Wenn JA
-                    gameHelper.start();
-                } else {
-                    //Wenn KEIN Spiel läuft, einfach starten
-                    gameHelper.start();
-                }
-                //ggf. andere Methoden zum zurücksetzen der Bilder etc.
-            }
-        });
-
-        readTippButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen > 3) {
-                    lineArray[derzeitigeRunde] = new Line(ballArray[0], ballArray[1], ballArray[2], ballArray[3]);
-                    anzahlFarbWahlen = 0;
-
-                    int[] anzSticks = new int[2];
-                    anzSticks = gameHelper.checkLine(gameHelper.getMasterLine(), lineArray[derzeitigeRunde]);
-                    System.out.println(anzSticks[0] + " " + anzSticks[1]);
-                    int k = 0;
-                    for (int i = anzSticks[0]; i > 0; i--) {
-                        labelResultDisplay[9 - derzeitigeRunde][k].setIcon(pinBlack);
-                        k++;
-                    }
-                    for (int i = anzSticks[1]; i > 0; i--) {
-                        labelResultDisplay[9 - derzeitigeRunde][k].setIcon(pinWhite);
-                        k++;
-                    }
-                    derzeitigeRunde++;
-                }else {
-                    JOptionPane.showMessageDialog(null,"Bitte erst vier Kugeln auswählen.","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-
-        });
-
-        ballButton[0].addActionListener(new ActionListener() {
-                @Override
-             public void actionPerformed(ActionEvent e) {
-                 if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconRed);
-                    ballArray[anzahlFarbWahlen] = new Ball(0);
-                    anzahlFarbWahlen++;
-                 }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben.","Warnung", JOptionPane.PLAIN_MESSAGE);
-                  }
-             }
-        });
-        ballButton[1].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconMagenta);
-                    ballArray[anzahlFarbWahlen] = new Ball(1);
-                    anzahlFarbWahlen++;
-                }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-        ballButton[2].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconYellow);
-                    ballArray[anzahlFarbWahlen] = new Ball(2);
-                    anzahlFarbWahlen++;
-                }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-        ballButton[3].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconGreen);
-                    ballArray[anzahlFarbWahlen] = new Ball(3);
-                    anzahlFarbWahlen++;
-                }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-        ballButton[4].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconBlue);
-                    ballArray[anzahlFarbWahlen] = new Ball(4);
-                    anzahlFarbWahlen++;
-                }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-        ballButton[5].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconCyan);
-                    ballArray[anzahlFarbWahlen] = new Ball(5);
-                    anzahlFarbWahlen++;
-                }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-        ballButton[6].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconWhite);
-                    ballArray[anzahlFarbWahlen] = new Ball(6);
-                    anzahlFarbWahlen++;
-                }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-        ballButton[7].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (anzahlFarbWahlen < 4) {
-                    ballLabel[9 - derzeitigeRunde][anzahlFarbWahlen].setIcon(iconBlack);
-                    ballArray[anzahlFarbWahlen] = new Ball(7);
-                    anzahlFarbWahlen++;
-                }else{
-                    JOptionPane.showMessageDialog(null,"Bitte erst Tipp abgeben","Warnung", JOptionPane.PLAIN_MESSAGE);
-                }
-            }
-        });
-
-
-
-        //======================================
-        //Beispiel für das Auswählen einer Kugel
-
-        //Jede RUNDE wird eine neue Line erstellt. In diese werden dann, je nach User auswahl, die Kugeln gelegt.
-        /*Line line = new Line(); //Neue Runde
-        lineArray[derzeitigeRunde] = line; //Neue Runde
-
-        Ball ballA = new Ball(Ball.BLACK); //Klick auf eine neue Kugel
-        lineArray[derzeitigeRunde].addBall(ballA);
-        icon = new ImageIcon(ballA.getImg());
-        ballLabel = new JLabel(icon);
-        grid[derzeitigeRunde].add(ballLabel);
-        //Und das halt für alle ActionListener für die jeweiligen Farben
-
-        //===============================================================
-        //Beispiel für das entfernen einer Kugel von der derzeitigen Line
-
-        //Wird auch über den ActionListener getriggert.
-        lineArray[derzeitigeRunde].removeLastBall();
-        grid[derzeitigeRunde].remove(grid[derzeitigeRunde].getComponentCount());
-        */
 
     }
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == menuItemOpen) {
-
-        }
-        if (actionEvent.getSource() == menuItemClose) {
-            System.exit(0);
-        }
-        if (actionEvent.getSource() == menuItemTutorial) {
-
-        }
-        if (actionEvent.getSource() == menuItemTipp) {
-
-        }
-        if (actionEvent.getSource() == menuItemAbout) {
-            JOptionPane.showMessageDialog(null, "MasterMind wurde erstellt von Neil Onasch, Erik Rohkohl, Eric Sowka und Alexander Lisnitzki.", "Über", JOptionPane.PLAIN_MESSAGE);
+    public static void repaint(){
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 4; j++){
+               ballLabel[i][j].setIcon(icon);
+               labelResultDisplay[i][j].setIcon(pin);
+            }
         }
     }
 }
