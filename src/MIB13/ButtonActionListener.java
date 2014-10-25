@@ -1,7 +1,6 @@
 package MIB13;
 
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -166,11 +165,11 @@ public class ButtonActionListener  implements ActionListener{
         
         if (e.getSource() == MasterGUI.screenButton) {
         	if ((MasterGUI.activeBG + 1) <= 8) {
-        		
-        	} else {
-        		
-        	}
-        	
+                MasterGUI.activeBG++;
+            } else {
+                MasterGUI.activeBG = 0;
+            }
+            MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/background" + MasterGUI.activeBG + ".png"));
         }
 
 

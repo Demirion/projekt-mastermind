@@ -48,6 +48,7 @@ public class MasterGUI {
     public static int activeBG = 0;
     public static File audioFile = new File("./res/snd/music.wav");
     public static AudioClip player = null;
+    public static JLabel backGroundLabel;
     public Ball ballRed = new Ball(0);
     public Ball ballMagenta = new Ball(1);
     public Ball ballYellow = new Ball(2);
@@ -76,7 +77,7 @@ public class MasterGUI {
     void Init() {
         //Am besten wäre es wohl ein Gitter zu erstellen, welches wie Folgt aufgebaut ist:
         JFrame frame = new JFrame("MasterMind");
-        JLabel backGroundLabel = new JLabel(backGroundImage);
+        backGroundLabel = new JLabel(backGroundImage);
         JPanel backGround = new JPanel();
         JPanel controlPanel = new JPanel();
         JPanel mediaPanel = new JPanel();
