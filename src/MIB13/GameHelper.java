@@ -1,6 +1,9 @@
 package MIB13;
 
 import javax.swing.*;
+
+import MIB13.Counter;
+
 import java.util.Random;
 
 /**
@@ -62,6 +65,8 @@ public class GameHelper {
      * eine MasterLine mit dem Argument multiColors erstellt werden.
      */
     public void start() {
+    	Counter.count = 0;
+    	Counter mytimer = new Counter();
         System.out.println("Spiel Start"); //TODO debug entfernen
         init();
         masterLine = new MasterLine(isMultiColors());
