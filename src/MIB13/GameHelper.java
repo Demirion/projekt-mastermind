@@ -66,6 +66,8 @@ public class GameHelper {
      */
     public void start() {
     	Counter.count = 0;
+    	Counter.time = 0;
+    	Counter.min = 0;
     	Counter.timer.start();
         System.out.println("Spiel Start"); //TODO debug entfernen
         init();
