@@ -134,7 +134,7 @@ public class MasterGUI {
         }
 
         //Label für Zeit
-        timeLabel = new JLabel("Zeit: 0");
+        timeLabel = new JLabel("Zeit: 00:00");
         timeLabel.setSize(100, 20);
         timeLabel.setForeground(Color.white);
         controlPanel.add(timeLabel);
