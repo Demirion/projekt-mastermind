@@ -164,12 +164,14 @@ public class ButtonActionListener  implements ActionListener{
         }
         
         if (e.getSource() == MasterGUI.screenButton) {
-        	if ((MasterGUI.activeBG + 1) <= 8) {
-                MasterGUI.activeBG++;
-            } else {
-                MasterGUI.activeBG = 0;
+            if (!MasterGUI.nyanMode) {
+                if ((MasterGUI.activeBG + 1) <= 8) {
+                    MasterGUI.activeBG++;
+                } else {
+                    MasterGUI.activeBG = 0;
+                }
+                MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/background" + MasterGUI.activeBG + ".png"));
             }
-            MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/background" + MasterGUI.activeBG + ".png"));
         }
 
 
