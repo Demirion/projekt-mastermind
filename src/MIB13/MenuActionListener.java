@@ -1,8 +1,10 @@
 package MIB13;
 
 import javax.swing.*;
+import java.applet.Applet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 
 /**
  * Created by erikrohkohl on 25.10.14.
@@ -49,6 +51,37 @@ public class MenuActionListener implements ActionListener {
         if (e.getSource() == MasterGUI.menuItemMultiColorOff){
             MasterGUI.gameHelper.setMultiColors(false);
             MasterGUI.gameHelper.start();
+        }
+        if (e.getSource() == MasterGUI.menuItemNyanMode) {
+            if (MasterGUI.nyanMode) {
+                MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/background" + MasterGUI.activeBG + ".png"));
+                MasterGUI.player.stop();
+                MasterGUI.musicplaying = false;
+                MasterGUI.musicButton.setIcon(new ImageIcon("./res/img/audio_off.png"));
+
+                try {
+                    MasterGUI.player = Applet.newAudioClip(MasterGUI.bmgAudioFile.toURL());
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                    System.out.println("Audiodatei nicht gefunden.");
+                }
+                MasterGUI.nyanMode = false;
+            } else {
+                MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/nyan.gif"));
+                MasterGUI.player.stop();
+                try {
+                    MasterGUI.player = Applet.newAudioClip(MasterGUI.nyanAudioFile.toURL());
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                    System.out.println("Audiodatei nicht gefunden.");
+                }
+                MasterGUI.player.loop();
+                MasterGUI.musicplaying = true;
+                MasterGUI.musicButton.setIcon(new ImageIcon("./res/img/audio_on.png"));
+                MasterGUI.nyanMode = true;
+            }
+
+
         }
 
     }

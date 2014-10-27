@@ -40,15 +40,18 @@ public class MasterGUI {
     public static JMenu menuItemGameModi;
     public static JMenuItem menuItemMultiColorOn;
     public static JMenuItem menuItemMultiColorOff;
+    public static JMenuItem menuItemNyanMode;
     public static JMenuBar menuBar;
     public static JMenu menuHelp;
     public static JMenu menuDatei;
     public static JMenu menuOption;
     public static boolean musicplaying = false;
     public static int activeBG = 0;
-    public static File audioFile = new File("./res/snd/bmg.mid");
+    public static File bmgAudioFile = new File("./res/snd/bgm.mid");
+    public static File nyanAudioFile = new File("./res/snd/bgmnyan.mid");
     public static AudioClip player = null;
     public static JLabel backGroundLabel;
+    public static boolean nyanMode = false;
     public Ball ballRed = new Ball(0);
     public Ball ballMagenta = new Ball(1);
     public Ball ballYellow = new Ball(2);
@@ -208,7 +211,7 @@ public class MasterGUI {
 
         //Music Player
         try {
-            player = Applet.newAudioClip(audioFile.toURL());
+            player = Applet.newAudioClip(bmgAudioFile.toURL());
         } catch (MalformedURLException e1) {
             e1.printStackTrace();
             System.out.println("Audiodatei nicht gefunden.");
@@ -253,14 +256,17 @@ public class MasterGUI {
         menuItemGameModi = new JMenu("Spielmodus");
         menuItemMultiColorOff = new JMenuItem("Multicolor OFF");
         menuItemMultiColorOn = new JMenuItem("Multicolor ON");
+        menuItemNyanMode = new JMenuItem("NYAN NYAN");
         menuItemGameModi.addActionListener(menuListener);
         menuItemNewGame.addActionListener(menuListener);
         menuItemMultiColorOff.addActionListener(menuListener);
         menuItemMultiColorOn.addActionListener(menuListener);
+        menuItemNyanMode.addActionListener(menuListener);
 
         //Menüelemente zusammenfügen
         menuItemGameModi.add(menuItemMultiColorOff);
         menuItemGameModi.add(menuItemMultiColorOn);
+        menuItemGameModi.add(menuItemNyanMode);
         menuBar.add(menuDatei);
         menuBar.add(menuOption);
         menuBar.add(Box.createGlue());
