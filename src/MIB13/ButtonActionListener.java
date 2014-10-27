@@ -141,7 +141,7 @@ public class ButtonActionListener  implements ActionListener{
         	if(MasterGUI.musicplaying == false) {
         		MasterGUI.musicplaying = true;
         		try{
-        			stream = new AudioStream(new FileInputStream("./res/snd/music.wav"));
+        			stream = new AudioStream(new FileInputStream("./res/snd/bgm.wav"));
         			data = stream.getData();
         			loop = new ContinuousAudioDataStream(data);
         		} catch(IOException error) {}
