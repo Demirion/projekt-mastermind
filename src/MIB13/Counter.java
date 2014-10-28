@@ -18,12 +18,11 @@ public class Counter extends JFrame {
 	//Timer constructor
 	public Counter() {
 		timer = new Timer(1000, new TimerListener()); //Tempo
-		//timer.start();
 	}
 
 	private class TimerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-		    MasterGUI.timeLabel.setText(String.format("Zeit: %02d:%02d%n" ,min, time)); //Überschreiben des Labels
+		    MasterGUI.timeLabel.setText(String.format("Zeit: %02d:%02d" ,min, time)); //Überschreiben des Labels
 			count++; //Sekundenzähler
 			time++;
 			if(time == 60){
