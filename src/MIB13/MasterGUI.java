@@ -47,7 +47,7 @@ public class MasterGUI {
     public static JMenu menuOption;
     public static boolean musicplaying = false;
     public static int activeBG = 0;
-    public static File bmgAudioFile = new File("./res/snd/bgm.mid");
+    public static File bmgAudioFile = new File("./res/snd/bgm.wav");
     public static File nyanAudioFile = new File("./res/snd/bgmnyan.wav");
     public static AudioClip player = null;
     public static JLabel backGroundLabel;
