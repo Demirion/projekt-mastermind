@@ -133,8 +133,8 @@ public class GameHelper {
         System.out.println("Gewonnen!"); //Debug
         gameIsRunning = false;
         int time = Counter.count; //TODO durch richtige Zeit ersetzen
-        int score = (100000 - time * 5 * round * 10); //TODO score berechnen
-        if(score < 0){
+        int score = (100000 - (time * 200 + round * 8000)); //TODO score berechnen
+        if(score < 1){
             score = 1;
         }
         JOptionPane.showConfirmDialog(null, "Herzlichen Glückwunsch! Sie sind das Mastermind.\n\n\nBenötigte Zeit: " + time + " Sekunden.\nBenötigte Runden: " + (MasterGUI.derzeitigeRunde + 1) + "\nScore: " + score + " Punkte.", "Gewonnen!", JOptionPane.DEFAULT_OPTION);
