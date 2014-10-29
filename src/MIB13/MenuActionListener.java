@@ -21,7 +21,7 @@ public class MenuActionListener implements ActionListener {
 
         }
         if (e.getSource() == MasterGUI.menuItemTipp) {
-
+            //MasterGUI.gameHelper.getHelp(MasterGUI.gameHelper.getMasterLine(), MasterGUI.lineArray[MasterGUI.derzeitigeRunde]);
         }
         if (e.getSource() == MasterGUI.menuItemAbout) {
             JOptionPane.showMessageDialog(null, "MasterMind wurde erstellt von Neil Onasch, Erik Rohkohl, Eric Sowka und Alexander Lisnitzki.", "Über", JOptionPane.PLAIN_MESSAGE);

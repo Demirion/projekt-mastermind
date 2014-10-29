@@ -12,7 +12,7 @@ public class MasterGUI {
     public static GameHelper gameHelper;
     public static Line lineArray[] = new Line[10];
     public static int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
-    public static JButton newGameButton, ballButton[], readTippButton, musicButton, screenButton;
+    public static JButton newGameButton, ballButton[], readTippButton, musicButton, screenButton, ballDeleteButton;
     public static JPanel lineA = new JPanel(); //Nicht genutzt?
     public static JPanel[] panelResultDisplay = new JPanel[10];
     public static JLabel[][] labelResultDisplay = new JLabel[10][4];
@@ -96,6 +96,7 @@ public class MasterGUI {
         frame.setSize(430, 670);
         frame.setMinimumSize(new Dimension(430, 670));
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //LayoutManager
@@ -103,9 +104,9 @@ public class MasterGUI {
         backGround.setLayout(new GridLayout(10, 1));
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
         //mediaPanel.setLayout(new BoxLayout(mediaPanel, BoxLayout.X_AXIS));
-        mediaPanel.setMinimumSize(new Dimension(5,5));
-        mediaPanel.setSize(new Dimension(5,5));
-        mediaPanel.setPreferredSize(new Dimension(5,5));
+        mediaPanel.setMinimumSize(new Dimension(5, 5));
+        mediaPanel.setSize(new Dimension(5, 5));
+        mediaPanel.setPreferredSize(new Dimension(5, 5));
         mediaPanel.setOpaque(false);
         
 
@@ -122,8 +123,9 @@ public class MasterGUI {
 
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
-                ballLabel[j][i] = new JLabel(icon);
+                ballLabel[j][i] = new JLabel(icon,JLabel.CENTER);
                 ballLabel[j][i].setSize(50, 50);
+                ballLabel[j][i].setHorizontalAlignment(SwingConstants.CENTER);
                 ballLabel[j][i].setOpaque(false);
                 labelResultDisplay[j][i] = new JLabel(pin);
                 labelResultDisplay[j][i].setSize(5, 5);
@@ -137,9 +139,11 @@ public class MasterGUI {
         }
 
         //Label für Zeit
-        timeLabel = new JLabel("Zeit: 00:00");
+        timeLabel = new JLabel("     Zeit: 00:00");
         timeLabel.setSize(100, 20);
         timeLabel.setForeground(Color.white);
+        timeLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         controlPanel.add(timeLabel);
 
         //Neues Game Button
@@ -194,12 +198,18 @@ public class MasterGUI {
         controlPanel.add(readTippButton);
 
         controlPanel.add(mediaPanel);
-        
+
+        //Ball entfernen
+        ballDeleteButton = new JButton("<---");
+        ballDeleteButton.setSize(50,150);
+        controlPanel.add(ballDeleteButton);
+        ballDeleteButton.addActionListener(listener);
+
         //music button
         musicButton = new JButton();
         musicButton.setSize(30, 30);
         musicButton.setPreferredSize(new Dimension(30, 30));
-        musicButton.setMinimumSize(new Dimension(30,30));
+        musicButton.setMinimumSize(new Dimension(30, 30));
         musicButton.setIcon(new ImageIcon("./res/img/audio_off.png"));
         musicButton.setBackground(null);
         musicButton.setOpaque(false);
@@ -219,9 +229,9 @@ public class MasterGUI {
         
         //screenButton
         screenButton = new JButton();
-        screenButton.setSize(30,30);
-        screenButton.setPreferredSize(new Dimension(30,30));
-        screenButton.setMinimumSize(new Dimension(30,30));
+        screenButton.setSize(30, 30);
+        screenButton.setPreferredSize(new Dimension(30, 30));
+        screenButton.setMinimumSize(new Dimension(30, 30));
         screenButton.setIcon(new ImageIcon("./res/img/screen_button.png"));
         screenButton.setBackground(null);
         screenButton.setOpaque(false);

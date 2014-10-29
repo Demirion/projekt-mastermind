@@ -1,6 +1,7 @@
 package MIB13;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,8 +10,12 @@ public class ButtonActionListener  implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         if (MasterGUI.gameHelper.gameIsRunning()) {
-            if (e.getSource() == MasterGUI.ballButton[0]) {
+            if (e.getSource() == MasterGUI.ballButton[0] && MasterGUI.ballButton[0].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[0].setIcon(MasterGUI.icon);
+                    }
+                    MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconRed);
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconRed);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.RED);
                     MasterGUI.anzahlFarbWahlen++;
@@ -19,8 +24,11 @@ public class ButtonActionListener  implements ActionListener{
                 }
             }
 
-            if (e.getSource() == MasterGUI.ballButton[1]) {
+            if (e.getSource() == MasterGUI.ballButton[1]&& MasterGUI.ballButton[1].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[1].setIcon(MasterGUI.icon);
+                    }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconMagenta);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.MAGENTA);
                     MasterGUI.anzahlFarbWahlen++;
@@ -28,8 +36,11 @@ public class ButtonActionListener  implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
                 }
             }
-            if (e.getSource() == MasterGUI.ballButton[2]) {
+            if (e.getSource() == MasterGUI.ballButton[2]&& MasterGUI.ballButton[2].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[2].setIcon(MasterGUI.icon);
+                    }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconYellow);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.YELLOW);
                     MasterGUI.anzahlFarbWahlen++;
@@ -39,8 +50,11 @@ public class ButtonActionListener  implements ActionListener{
             }
 
 
-            if (e.getSource() == MasterGUI.ballButton[3]) {
+            if (e.getSource() == MasterGUI.ballButton[3]&& MasterGUI.ballButton[3].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[3].setIcon(MasterGUI.icon);
+                    }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconGreen);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.GREEN);
                     MasterGUI.anzahlFarbWahlen++;
@@ -49,8 +63,11 @@ public class ButtonActionListener  implements ActionListener{
                 }
             }
 
-            if (e.getSource() == MasterGUI.ballButton[4]) {
+            if (e.getSource() == MasterGUI.ballButton[4]&& MasterGUI.ballButton[4].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[4].setIcon(MasterGUI.icon);
+                    }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconBlue);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.BLUE);
                     MasterGUI.anzahlFarbWahlen++;
@@ -59,8 +76,11 @@ public class ButtonActionListener  implements ActionListener{
                 }
             }
 
-            if (e.getSource() == MasterGUI.ballButton[5]) {
+            if (e.getSource() == MasterGUI.ballButton[5]&& MasterGUI.ballButton[5].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[5].setIcon(MasterGUI.icon);
+                    }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconCyan);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.CYAN);
                     MasterGUI.anzahlFarbWahlen++;
@@ -69,8 +89,11 @@ public class ButtonActionListener  implements ActionListener{
                 }
             }
 
-            if (e.getSource() == MasterGUI.ballButton[6]) {
+            if (e.getSource() == MasterGUI.ballButton[6]&& MasterGUI.ballButton[6].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[6].setIcon(MasterGUI.icon);
+                    }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconWhite);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.WHITE);
                     MasterGUI.anzahlFarbWahlen++;
@@ -78,8 +101,11 @@ public class ButtonActionListener  implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
                 }
             }
-            if (e.getSource() == MasterGUI.ballButton[7]) {
+            if (e.getSource() == MasterGUI.ballButton[7] && MasterGUI.ballButton[7].getIcon()!=MasterGUI.icon) {
                 if (MasterGUI.anzahlFarbWahlen < GameHelper.LINESIZE) {
+                    if (!(MasterGUI.gameHelper.isMultiColors())){
+                        MasterGUI.ballButton[7].setIcon(MasterGUI.icon);
+                    }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconBlack);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.BLACK);
                     MasterGUI.anzahlFarbWahlen++;
@@ -91,6 +117,15 @@ public class ButtonActionListener  implements ActionListener{
                 if (MasterGUI.anzahlFarbWahlen >= GameHelper.LINESIZE) {
                     MasterGUI.lineArray[MasterGUI.derzeitigeRunde] = new Line(MasterGUI.ballArray[0], MasterGUI.ballArray[1], MasterGUI.ballArray[2], MasterGUI.ballArray[3]);
                     MasterGUI.anzahlFarbWahlen = 0;
+
+                    MasterGUI.ballButton[0].setIcon(MasterGUI.iconRed);
+                    MasterGUI.ballButton[1].setIcon(MasterGUI.iconMagenta);
+                    MasterGUI.ballButton[2].setIcon(MasterGUI.iconYellow);
+                    MasterGUI.ballButton[3].setIcon(MasterGUI.iconGreen);
+                    MasterGUI.ballButton[4].setIcon(MasterGUI.iconBlue);
+                    MasterGUI.ballButton[5].setIcon(MasterGUI.iconCyan);
+                    MasterGUI. ballButton[6].setIcon(MasterGUI.iconWhite);
+                    MasterGUI. ballButton[7].setIcon(MasterGUI.iconBlack);
 
                     int[] anzSticks;
                     anzSticks = MasterGUI.gameHelper.checkLine(MasterGUI.gameHelper.getMasterLine(), MasterGUI.lineArray[MasterGUI.derzeitigeRunde]);
@@ -131,6 +166,14 @@ public class ButtonActionListener  implements ActionListener{
             }
 
         } //newGameButton
+
+        if (e.getSource() == MasterGUI.ballDeleteButton && MasterGUI.anzahlFarbWahlen>0){
+            MasterGUI.anzahlFarbWahlen--;
+            int i =MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen].getColor();
+            MasterGUI.ballButton[i].setIcon(new ImageIcon("./res/img/" + MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen].getColorString() + ".png"));
+            MasterGUI.ballLabel[9-MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.icon);
+            MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen]=null;
+        }
 
 
         if (e.getSource() == MasterGUI.musicButton){
@@ -173,7 +216,7 @@ public class ButtonActionListener  implements ActionListener{
                 MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/background" + MasterGUI.activeBG + ".png"));
             }
         }
-
-
     }
+
+
 }
