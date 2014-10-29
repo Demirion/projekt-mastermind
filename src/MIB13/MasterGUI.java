@@ -12,7 +12,7 @@ public class MasterGUI {
     public static GameHelper gameHelper;
     public static Line lineArray[] = new Line[10];
     public static int derzeitigeRunde = 0, anzahlFarbWahlen = 0;
-    public static JButton newGameButton, ballButton[], readTippButton, musicButton, screenButton, ballDeleteButton;
+    public static JButton newGameButton, ballButton[], readTippButton, musicButton, screenButton, ballDeleteButton,del[];
     public static JPanel lineA = new JPanel(); //Nicht genutzt?
     public static JPanel[] panelResultDisplay = new JPanel[10];
     public static JLabel[][] labelResultDisplay = new JLabel[10][4];
@@ -94,7 +94,7 @@ public class MasterGUI {
 
         //Frame aufbauen
         frame.setLocation(100, 100);
-        frame.setSize(430, 670);
+        frame.setSize(480, 670);
         frame.setMinimumSize(new Dimension(430, 670));
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
@@ -114,8 +114,8 @@ public class MasterGUI {
         backPanel.setSize(new Dimension(5, 40));
         backPanel.setPreferredSize(new Dimension(5, 40));
         backPanel.setOpaque(false);
-        
 
+        del = new JButton[10];
         //Label erstellen
         for (int j = 0; j < grid.length; j++) {
             numberLabel = new JLabel();
@@ -123,9 +123,16 @@ public class MasterGUI {
             numberLabel.setSize(36, 50);
             numberLabel.setMinimumSize(new Dimension(36, 50));
             numberLabel.setIcon(new ImageIcon("./res/img/number" + Math.abs(j - 10) + ".png"));
-            //numberLabel.setText(String.valueOf(j + 1));
             panelResultDisplay[j] = new JPanel(new GridLayout(2, 2, 2, 2));
             panelResultDisplay[j].setOpaque(false);
+            del[j] = new JButton();
+            del[j].setIcon(new ImageIcon("./res/img/backButtontrans.png"));
+            del[j].setOpaque(false);
+            del[j].setBackground(null);
+            del[j].setBorderPainted(false);
+            del[j].setContentAreaFilled(false);
+            del[j].setFocusPainted(false);
+            del[j].addActionListener(listener);
 
             grid[j].add(numberLabel);
             for (int i = 0; i < 4; i++) {
@@ -140,9 +147,13 @@ public class MasterGUI {
                 panelResultDisplay[j].add(labelResultDisplay[j][i]);
 
             }
+
             grid[j].add(panelResultDisplay[j]);
+            grid[j].add(del[j]);
             backGround.add(grid[j]);
         }
+
+        del[9].setIcon(new ImageIcon("./res/img/backButton.png"));
 
         //Label für Zeit
         timeLabel = new JLabel("     Zeit: 00:00");
@@ -216,7 +227,7 @@ public class MasterGUI {
         ballDeleteButton.setContentAreaFilled(false);
         ballDeleteButton.setFocusPainted(false);
         ballDeleteButton.setBorderPainted(false);
-        backPanel.add(ballDeleteButton);
+        //backPanel.add(ballDeleteButton);
         ballDeleteButton.addActionListener(listener);
 
         //Button um Tipp abzugeben

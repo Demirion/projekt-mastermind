@@ -127,6 +127,9 @@ public class ButtonActionListener  implements ActionListener{
                     MasterGUI. ballButton[6].setIcon(MasterGUI.iconWhite);
                     MasterGUI. ballButton[7].setIcon(MasterGUI.iconBlack);
 
+                    MasterGUI.del[9-MasterGUI.derzeitigeRunde].setIcon(new ImageIcon("./res/img/backButtontrans.png"));
+                    MasterGUI.del[9-MasterGUI.derzeitigeRunde - 1].setIcon(new ImageIcon("./res/img/backButton.png"));
+
                     int[] anzSticks;
                     anzSticks = MasterGUI.gameHelper.checkLine(MasterGUI.gameHelper.getMasterLine(), MasterGUI.lineArray[MasterGUI.derzeitigeRunde]);
                     System.out.println(anzSticks[0] + " " + anzSticks[1]); //TODO debug entfernen vor release
@@ -163,11 +166,17 @@ public class ButtonActionListener  implements ActionListener{
                 MasterGUI.derzeitigeRunde = 0;
                 MasterGUI.anzahlFarbWahlen = 0;
                 MasterGUI.gameHelper.start();
+                for (int i =  0; i<9; i++) {
+                    MasterGUI.del[i].setIcon(new ImageIcon("./res/img/backButtontrans.png"));
+                }
+                MasterGUI.del[9-MasterGUI.derzeitigeRunde].setIcon(new ImageIcon("./res/img/backButton.png"));
             }
 
         } //newGameButton
 
-        if (e.getSource() == MasterGUI.ballDeleteButton && MasterGUI.anzahlFarbWahlen>0){
+        if ((e.getSource() == MasterGUI.del[9] || e.getSource() == MasterGUI.del[8]||e.getSource() == MasterGUI.del[7]||e.getSource() == MasterGUI.del[6]||
+        e.getSource() == MasterGUI.del[5]||e.getSource() == MasterGUI.del[4]||e.getSource() == MasterGUI.del[3]||e.getSource() == MasterGUI.del[2]||
+                e.getSource() == MasterGUI.del[1]||e.getSource() == MasterGUI.del[0])&& MasterGUI.anzahlFarbWahlen>0){
             MasterGUI.anzahlFarbWahlen--;
             int i =MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen].getColor();
             MasterGUI.ballButton[i].setIcon(new ImageIcon("./res/img/" + MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen].getColorString() + ".png"));
