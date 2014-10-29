@@ -133,7 +133,7 @@ public class GameHelper {
         System.out.println("Gewonnen!"); //Debug
         gameIsRunning = false;
         int time = Counter.count; //TODO durch richtige Zeit ersetzen
-        int score = (100000 - time * 200 + round * 8000); //TODO score berechnen
+        int score = (100000 - (time * 200 + round * 8000)); //TODO score berechnen
         if(score < 1){
             score = 1;
         }
