@@ -84,6 +84,7 @@ public class MasterGUI {
         JPanel backGround = new JPanel();
         JPanel controlPanel = new JPanel();
         JPanel mediaPanel = new JPanel();
+        JPanel backPanel = new JPanel();
         JPanel panelFrameControl = new JPanel(new BorderLayout());
         JPanel grid[] = new JPanel[10];
         for (int i = 0; i < 10; i++) {
@@ -103,11 +104,16 @@ public class MasterGUI {
         lineA.setLayout(new FlowLayout()); //Nicht genutzt??
         backGround.setLayout(new GridLayout(10, 1));
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        backPanel.setLayout(new FlowLayout(FlowLayout.LEFT,2,0));
         //mediaPanel.setLayout(new BoxLayout(mediaPanel, BoxLayout.X_AXIS));
-        mediaPanel.setMinimumSize(new Dimension(5, 5));
-        mediaPanel.setSize(new Dimension(5, 5));
-        mediaPanel.setPreferredSize(new Dimension(5, 5));
+        mediaPanel.setMinimumSize(new Dimension(5, 12));
+        mediaPanel.setSize(new Dimension(5, 12));
+        mediaPanel.setPreferredSize(new Dimension(5, 12));
         mediaPanel.setOpaque(false);
+        backPanel.setMinimumSize(new Dimension(5, 40));
+        backPanel.setSize(new Dimension(5, 40));
+        backPanel.setPreferredSize(new Dimension(5, 40));
+        backPanel.setOpaque(false);
         
 
         //Label erstellen
@@ -162,7 +168,7 @@ public class MasterGUI {
 
         //Button für Ball erzeugen
         ballButton = new JButton[8];
-        for (int i = 0; i < ballButton.length; i++) {
+        for (int i = 0; i < ballButton.length-1; i++) {
             ballButton[i] = new JButton(icon);
             ballButton[i].setSize(50, 50);
             ballButton[i].setBackground(null);
@@ -170,9 +176,8 @@ public class MasterGUI {
             ballButton[i].setContentAreaFilled(false);
             ballButton[i].setFocusPainted(false);
             ballButton[i].getSize();
-            //ballButton[i].setBorder(null);
             ballButton[i].setBorderPainted(false);
-            ballButton[i].setLocation(325, 60 + i * 50);
+            //ballButton[i].setLocation(325, 60 + i * 50);
             ballButton[i].addActionListener(listener);
             controlPanel.add(ballButton[i]);
         }
@@ -183,7 +188,36 @@ public class MasterGUI {
         ballButton[4].setIcon(iconBlue);
         ballButton[5].setIcon(iconCyan);
         ballButton[6].setIcon(iconWhite);
+        
+        controlPanel.add(backPanel);
+        ballButton[7] = new JButton(icon);
+        ballButton[7].setSize(50, 50);
+        ballButton[7].setBackground(null);
+        ballButton[7].setOpaque(false);
+        ballButton[7].setContentAreaFilled(false);
+        ballButton[7].setFocusPainted(false);
+        ballButton[7].getSize();
+        ballButton[7].setBorderPainted(false);
+        ballButton[7].addActionListener(listener);
+        backPanel.add(ballButton[7]);
+        
         ballButton[7].setIcon(iconBlack);
+        
+        
+        //Ball entfernen
+        ballDeleteButton = new JButton();
+        ballDeleteButton.setSize(35,35);
+        ballDeleteButton.setPreferredSize(new Dimension(35,35));
+        ballDeleteButton.setMinimumSize(new Dimension(35,35));
+        ballDeleteButton.setBorder(null);
+        ballDeleteButton.setIcon(new ImageIcon("./res/img/backButton.png"));
+        ballDeleteButton.setBackground(null);
+        ballDeleteButton.setOpaque(false);
+        ballDeleteButton.setContentAreaFilled(false);
+        ballDeleteButton.setFocusPainted(false);
+        ballDeleteButton.setBorderPainted(false);
+        backPanel.add(ballDeleteButton);
+        ballDeleteButton.addActionListener(listener);
 
         //Button um Tipp abzugeben
         readTippButton = new JButton();
@@ -198,12 +232,6 @@ public class MasterGUI {
         controlPanel.add(readTippButton);
 
         controlPanel.add(mediaPanel);
-
-        //Ball entfernen
-        ballDeleteButton = new JButton("<---");
-        ballDeleteButton.setSize(50,150);
-        controlPanel.add(ballDeleteButton);
-        ballDeleteButton.addActionListener(listener);
 
         //music button
         musicButton = new JButton();
