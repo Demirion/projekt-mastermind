@@ -94,7 +94,8 @@ public class MasterGUI {
 
         //Frame aufbauen
         frame.setLocation(100, 100);
-        frame.setSize(480, 670);
+        frame.setSize(500, 670);
+        //frame.setSize(480, 670);
         frame.setMinimumSize(new Dimension(430, 670));
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
@@ -217,9 +218,9 @@ public class MasterGUI {
         
         //Ball entfernen
         ballDeleteButton = new JButton();
-        ballDeleteButton.setSize(35,35);
-        ballDeleteButton.setPreferredSize(new Dimension(35,35));
-        ballDeleteButton.setMinimumSize(new Dimension(35,35));
+        ballDeleteButton.setSize(35, 35);
+        ballDeleteButton.setPreferredSize(new Dimension(35, 35));
+        ballDeleteButton.setMinimumSize(new Dimension(35, 35));
         ballDeleteButton.setBorder(null);
         ballDeleteButton.setIcon(new ImageIcon("./res/img/backButton.png"));
         ballDeleteButton.setBackground(null);

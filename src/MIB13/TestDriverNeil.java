@@ -1,7 +1,5 @@
 package MIB13;
 
-import java.awt.*;
-
 /**
  * Created by niiru on 16.10.14.
  */
@@ -127,8 +125,8 @@ public class TestDriverNeil {
         //Gui angucken :)
         MasterGUI gui = new MasterGUI();
         //MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/nyan.gif"));
-        Dimension dim = new Dimension(430, 670);
-
+        //Dimension dim = new Dimension(430, 670);
+        gui.repaint();
 
         //MasterGUI.gameHelper.setMasterLine(multiMaster);
     }

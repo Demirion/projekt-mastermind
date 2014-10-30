@@ -1,12 +1,8 @@
 package MIB13;
 
 import javax.swing.*;
-import javax.swing.event.*;
-
-import MIB13.MasterGUI;
-
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Counter extends JFrame {
 
@@ -30,9 +26,5 @@ public class Counter extends JFrame {
 				time = 0;
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		new Counter();
 	}
 }

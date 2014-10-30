@@ -1,9 +1,6 @@
 package MIB13;
 
 import javax.swing.*;
-
-import MIB13.Counter;
-
 import java.util.Random;
 
 /**
@@ -65,10 +62,10 @@ public class GameHelper {
      * eine MasterLine mit dem Argument multiColors erstellt werden.
      */
     public void start() {
-    	Counter.count = 0;
-    	Counter.time = 0;
-    	Counter.min = 0;
-    	Counter.timer.start();
+        Counter.count = 0;
+        Counter.time = 0;
+        Counter.min = 0;
+        Counter.timer.start();
         System.out.println("Spiel Start"); //TODO debug entfernen
         init();
         masterLine = new MasterLine(isMultiColors());
@@ -98,7 +95,7 @@ public class GameHelper {
             for (int i = 0; i < GameHelper.LINESIZE; i++) {
                 mLine[i] = masterLine.getBall(i).getColor();
                 cLine[i] = line.getBall(i).getColor();
-                System.out.println("mLine : cLine = " + mLine[i] + " : " + cLine[i]); //debug
+                //System.out.println("mLine : cLine = " + mLine[i] + " : " + cLine[i]); //debug
             }
 
 
@@ -129,13 +126,13 @@ public class GameHelper {
      * Wenn das Spiel gewonnen ist, werden "Highscore" berechnet und das Spiel auf nicht laufend gesetzt.
      */
     public void gameWon() {
-    	Counter.timer.stop();
+        Counter.timer.stop();
         System.out.println("Gewonnen!"); //Debug
         gameIsRunning = false;
-        int time = Counter.count; //TODO durch richtige Zeit ersetzen
-        int score = (100000 - (time * 200 + round * 8000)); //TODO score berechnen
-        if(score < 1){
-            score = 1;
+        int time = Counter.count;
+        int score = (100000 - (time * 200 + round * 8000));
+        if (score <= 0) {
+            score = 0;
         }
         JOptionPane.showConfirmDialog(null, "Herzlichen Glückwunsch! Sie sind das Mastermind.\n\n\nBenötigte Zeit: " + time + " Sekunden.\nBenötigte Runden: " + (MasterGUI.derzeitigeRunde + 1) + "\nScore: " + score + " Punkte.", "Gewonnen!", JOptionPane.DEFAULT_OPTION);
     }
@@ -156,11 +153,15 @@ public class GameHelper {
 
         if (blackWhites[1] == 0) {
             //0 Weiße
-            return "Keine der Farben passt. Schließe diese kategorisch aus!";
+            if (blackWhites[0] > 0) {
+                return "Versuche herauszufinden, welche der Kugeln am richtigen platz sind. Die anderen können kategorisch ausgeschlossen werden,";
+            } else {
+                return "Schließe all diese Kugeln kategorisch aus!";
+            }
         }
         if (blackWhites[1] == 1) {
             //1 Weißer
-            retString = "Probier es noch mal ;)";
+            retString = "Eine Kugel ist nur noch nicht an der richtigen Position. Setze sie in den folgenden Iterationen auf jede mögliche Position.";
         }
         if (blackWhites[1] > 1) {
             //2+ Weiße

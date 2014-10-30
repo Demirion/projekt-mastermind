@@ -21,7 +21,17 @@ public class MenuActionListener implements ActionListener {
 
         }
         if (e.getSource() == MasterGUI.menuItemTipp) {
-            //MasterGUI.gameHelper.getHelp(MasterGUI.gameHelper.getMasterLine(), MasterGUI.lineArray[MasterGUI.derzeitigeRunde]);
+            if (MasterGUI.gameHelper.gameIsRunning()) {
+                if (MasterGUI.derzeitigeRunde != 0) {
+                    if (JOptionPane.showConfirmDialog(null, "Möchtest du wirklich einen Tipp?", "Hilfe", JOptionPane.YES_NO_OPTION) == 0) {
+                        String help;
+                        help = MasterGUI.gameHelper.getHelp(MasterGUI.gameHelper.getMasterLine(), MasterGUI.lineArray[MasterGUI.derzeitigeRunde - 1]);
+                        JOptionPane.showConfirmDialog(null, help, "Hilfe", JOptionPane.DEFAULT_OPTION);
+                    }
+                } else {
+                    JOptionPane.showConfirmDialog(null, "Du möchtest doch nicht schon in der ersten Runde einen Tipp.", "Hilfe", JOptionPane.CLOSED_OPTION);
+                }
+            }
         }
         if (e.getSource() == MasterGUI.menuItemAbout) {
             JOptionPane.showMessageDialog(null, "MasterMind wurde erstellt von Neil Onasch, Erik Rohkohl, Eric Sowka und Alexander Lisnitzki.", "Über", JOptionPane.PLAIN_MESSAGE);
@@ -32,23 +42,23 @@ public class MenuActionListener implements ActionListener {
         }
         if (e.getSource() == MasterGUI.menuItemNewGame) {
             if (MasterGUI.gameHelper.gameIsRunning()) {
-                int auswahl = JOptionPane.showConfirmDialog(null,"Möchten Sie ein neues Spiel anfangen?","Warnung",JOptionPane.YES_NO_OPTION);
-                if(auswahl == 0) {
+                int auswahl = JOptionPane.showConfirmDialog(null, "Möchten Sie ein neues Spiel anfangen?", "Warnung", JOptionPane.YES_NO_OPTION);
+                if (auswahl == 0) {
                     MasterGUI.repaint();
                     MasterGUI.gameHelper.start();
-                    MasterGUI.derzeitigeRunde=0;
-                    MasterGUI.anzahlFarbWahlen=0;
+                    MasterGUI.derzeitigeRunde = 0;
+                    MasterGUI.anzahlFarbWahlen = 0;
                 }
             } else {
                 MasterGUI.gameHelper.start();
             }
 
         }
-        if (e.getSource() == MasterGUI.menuItemMultiColorOn){
+        if (e.getSource() == MasterGUI.menuItemMultiColorOn) {
             MasterGUI.gameHelper.setMultiColors(true);
             MasterGUI.gameHelper.start();
         }
-        if (e.getSource() == MasterGUI.menuItemMultiColorOff){
+        if (e.getSource() == MasterGUI.menuItemMultiColorOff) {
             MasterGUI.gameHelper.setMultiColors(false);
             MasterGUI.gameHelper.start();
         }
