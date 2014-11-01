@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class ButtonActionListener  implements ActionListener{
 
+    public static int[][] gameField = new int[10][4];
+
     public void actionPerformed(ActionEvent e) {
         if (MasterGUI.gameHelper.gameIsRunning()) {
             if (e.getSource() == MasterGUI.ballButton[0] && MasterGUI.ballButton[0].getIcon()!=MasterGUI.icon) {
@@ -18,6 +20,7 @@ public class ButtonActionListener  implements ActionListener{
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconRed);
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconRed);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.RED);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -31,6 +34,7 @@ public class ButtonActionListener  implements ActionListener{
                     }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconMagenta);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.MAGENTA);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -43,6 +47,7 @@ public class ButtonActionListener  implements ActionListener{
                     }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconYellow);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.YELLOW);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -57,6 +62,7 @@ public class ButtonActionListener  implements ActionListener{
                     }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconGreen);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.GREEN);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -70,6 +76,7 @@ public class ButtonActionListener  implements ActionListener{
                     }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconBlue);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.BLUE);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -83,6 +90,7 @@ public class ButtonActionListener  implements ActionListener{
                     }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconCyan);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.CYAN);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -96,6 +104,7 @@ public class ButtonActionListener  implements ActionListener{
                     }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconWhite);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.WHITE);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -108,6 +117,7 @@ public class ButtonActionListener  implements ActionListener{
                     }
                     MasterGUI.ballLabel[9 - MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen].setIcon(MasterGUI.iconBlack);
                     MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen] = new Ball(Ball.BLACK);
+                    fillgameField();
                     MasterGUI.anzahlFarbWahlen++;
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst Tipp abgeben", "Warnung", JOptionPane.PLAIN_MESSAGE);
@@ -229,5 +239,7 @@ public class ButtonActionListener  implements ActionListener{
         }
     }
 
-
+    public void fillgameField() {
+        gameField[MasterGUI.derzeitigeRunde][MasterGUI.anzahlFarbWahlen] = MasterGUI.ballArray[MasterGUI.anzahlFarbWahlen].getColor();
+    }
 }

@@ -17,6 +17,7 @@ public class GameHelper {
     private int round = 0; //Wird auch in der MasterGUI gehandhabt..
     private MasterLine masterLine;
     //private int sticks[] = new int[2]; //[0] = black; [1] = white;
+    public static int[] mLine = new int[LINESIZE];
 
     public boolean gameIsRunning() {
         return gameIsRunning;
@@ -95,6 +96,7 @@ public class GameHelper {
             for (int i = 0; i < GameHelper.LINESIZE; i++) {
                 mLine[i] = masterLine.getBall(i).getColor();
                 cLine[i] = line.getBall(i).getColor();
+                GameHelper.mLine[i] = masterLine.getBall(i).getColor();
                 //System.out.println("mLine : cLine = " + mLine[i] + " : " + cLine[i]); //debug
             }
 
