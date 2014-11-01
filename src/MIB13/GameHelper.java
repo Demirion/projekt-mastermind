@@ -1,6 +1,8 @@
 package MIB13;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
@@ -116,14 +118,28 @@ public class GameHelper {
             }
             if (sticks[0] == 4) gameWon();
             round++;
-            if (round == MAXROUNDS && gameIsRunning()) {
-                System.out.println("Maximale Runden erreicht. Spielende.");
-                Counter.timer.stop();
-                gameIsRunning = false;
-                JOptionPane.showConfirmDialog(null, "Die Göttin des Glücks war dieses Mal nicht auf Ihrer Seite.\nWagen Sie es noch einmal zu versuchen?","Verloren!", JOptionPane.DEFAULT_OPTION);
-            }
+            if (round == MAXROUNDS && gameIsRunning()) gameLost();
         }
         return sticks;
+    }
+
+    public void gameLost() {
+        System.out.println("Maximale Runden erreicht. Spielende."); //TODO Debug
+        int offset = getMasterLine().getBall(0).getImg().getWidth() + 10;
+        BufferedImage masterLineImage = new BufferedImage(4 * offset, offset, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = masterLineImage.createGraphics();
+
+        g2d.drawImage(getMasterLine().getBall(0).getImg(), 0, 0, null);
+        g2d.drawImage(getMasterLine().getBall(1).getImg(), offset, 0, null);
+        g2d.drawImage(getMasterLine().getBall(2).getImg(), offset * 2, 0, null);
+        g2d.drawImage(getMasterLine().getBall(3).getImg(), offset * 3, 0, null);
+        g2d.dispose();
+        ImageIcon masterImageIcon = new ImageIcon(masterLineImage);
+
+        Counter.timer.stop();
+        gameIsRunning = false;
+        JOptionPane.showMessageDialog(null, "Die Göttin des Glücks war dieses Mal nicht auf Ihrer Seite.\nWagen Sie es noch einmal zu versuchen?", "Verloren!", JOptionPane.DEFAULT_OPTION, masterImageIcon);
+
     }
 
     /**
@@ -139,6 +155,7 @@ public class GameHelper {
             score = 0;
         }
         JOptionPane.showConfirmDialog(null, "Herzlichen Glückwunsch! Sie sind das Mastermind.\n\n\nBenötigte Zeit: " + time + " Sekunden.\nBenötigte Runden: " + (MasterGUI.derzeitigeRunde + 1) + "\nScore: " + score + " Punkte.", "Gewonnen!", JOptionPane.DEFAULT_OPTION);
+
     }
 
     /**

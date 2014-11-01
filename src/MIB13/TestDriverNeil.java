@@ -126,8 +126,15 @@ public class TestDriverNeil {
         MasterGUI gui = new MasterGUI();
         //MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/nyan.gif"));
         //Dimension dim = new Dimension(430, 670);
-        gui.repaint();
+        MasterGUI.repaint();
 
         //MasterGUI.gameHelper.setMasterLine(multiMaster);
+        MasterGUI.gameHelper.start();
+        MasterGUI.gameHelper.gameLost();
+
+
+        //JOptionPane.showMessageDialog(null, "Verloren", "Lutscher", JOptionPane.INFORMATION_MESSAGE, gay);
+
+
     }
 }
