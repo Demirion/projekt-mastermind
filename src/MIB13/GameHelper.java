@@ -114,9 +114,11 @@ public class GameHelper {
             }
             if (sticks[0] == 4) gameWon();
             round++;
-            if (round == MAXROUNDS) {
+            if (round == MAXROUNDS && gameIsRunning()) {
                 System.out.println("Maximale Runden erreicht. Spielende.");
+                Counter.timer.stop();
                 gameIsRunning = false;
+                JOptionPane.showConfirmDialog(null, "Die Göttin des Glücks war dieses Mal nicht auf Ihrer Seite.\nWagen Sie es noch einmal zu versuchen?","Verloren!", JOptionPane.DEFAULT_OPTION);
             }
         }
         return sticks;

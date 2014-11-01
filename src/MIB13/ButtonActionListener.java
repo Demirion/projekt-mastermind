@@ -128,7 +128,9 @@ public class ButtonActionListener  implements ActionListener{
                     MasterGUI. ballButton[7].setIcon(MasterGUI.iconBlack);
 
                     MasterGUI.del[9-MasterGUI.derzeitigeRunde].setIcon(new ImageIcon("./res/img/backButtontrans.png"));
-                    MasterGUI.del[9-MasterGUI.derzeitigeRunde - 1].setIcon(new ImageIcon("./res/img/backButton.png"));
+                    if(MasterGUI.derzeitigeRunde < 9){
+                        MasterGUI.del[9-MasterGUI.derzeitigeRunde - 1].setIcon(new ImageIcon("./res/img/backButton.png"));
+                    }
 
                     int[] anzSticks;
                     anzSticks = MasterGUI.gameHelper.checkLine(MasterGUI.gameHelper.getMasterLine(), MasterGUI.lineArray[MasterGUI.derzeitigeRunde]);
@@ -166,10 +168,10 @@ public class ButtonActionListener  implements ActionListener{
                 MasterGUI.derzeitigeRunde = 0;
                 MasterGUI.anzahlFarbWahlen = 0;
                 MasterGUI.gameHelper.start();
-                for (int i =  0; i<9; i++) {
+                for (int i = 0; i < 9; i++) {
                     MasterGUI.del[i].setIcon(new ImageIcon("./res/img/backButtontrans.png"));
                 }
-                MasterGUI.del[9-MasterGUI.derzeitigeRunde].setIcon(new ImageIcon("./res/img/backButton.png"));
+                MasterGUI.del[9 - MasterGUI.derzeitigeRunde].setIcon(new ImageIcon("./res/img/backButton.png"));
             }
 
         } //newGameButton
