@@ -229,7 +229,7 @@ public class ButtonActionListener  implements ActionListener{
         
         if (e.getSource() == MasterGUI.screenButton) {
             if (!MasterGUI.nyanMode) {
-                if ((MasterGUI.activeBG + 1) <= 8) {
+                if ((MasterGUI.activeBG + 1) <= 14) {
                     MasterGUI.activeBG++;
                 } else {
                     MasterGUI.activeBG = 0;
