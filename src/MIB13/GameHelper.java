@@ -13,13 +13,12 @@ import java.util.Random;
 public class GameHelper {
 
     public final static int LINESIZE = 4;
+    //private int sticks[] = new int[2]; //[0] = black; [1] = white;
+    public static int[] mLine = new int[LINESIZE];
     public final static int MAXROUNDS = 10;
     private boolean multiColors = false; //Option zum einstellen der Mehrfachfarbauswahl
     private boolean gameIsRunning = false;
-    private int round = 0; //Wird auch in der MasterGUI gehandhabt..
     private MasterLine masterLine;
-    //private int sticks[] = new int[2]; //[0] = black; [1] = white;
-    public static int[] mLine = new int[LINESIZE];
 
     public boolean gameIsRunning() {
         return gameIsRunning;
@@ -41,8 +40,8 @@ public class GameHelper {
         return masterLine;
     }
 
-    public int getRound() {
-        return round;
+    public void setMasterLine(MasterLine masterLine) {
+        this.masterLine = masterLine;
     }
 
     /**
@@ -50,13 +49,7 @@ public class GameHelper {
      * TODO Alle Werte auf 0 bzw false setzen.
      */
     public void init() {
-        round = 0;
         masterLine = null;
-
-    }
-
-    public void setMasterLine(MasterLine masterLine) {
-        this.masterLine = masterLine;
     }
 
     /**
@@ -91,6 +84,7 @@ public class GameHelper {
         int sticks[] = new int[2];
         int mLine[] = new int[GameHelper.LINESIZE];
         int cLine[] = new int[GameHelper.LINESIZE];
+        int round = MasterGUI.derzeitigeRunde;
 
         if (gameIsRunning) {
             sticks[0] = sticks[1] = 0;
@@ -116,13 +110,13 @@ public class GameHelper {
                     }
                 }
             }
-            if (sticks[0] == 4) gameWon();
-            round++;
-            if (round == MAXROUNDS && gameIsRunning()) gameLost();
         }
         return sticks;
     }
 
+    /**
+     * Wenn das Spiel verloren ist, wird die Master-Kombination angezeigt.
+     */
     public void gameLost() {
         System.out.println("Maximale Runden erreicht. Spielende."); //TODO Debug
         int offset = getMasterLine().getBall(0).getImg().getWidth() + 10;
@@ -150,7 +144,7 @@ public class GameHelper {
         System.out.println("Gewonnen!"); //Debug
         gameIsRunning = false;
         int time = Counter.count;
-        int score = (100000 - (time * 200 + round * 8000));
+        int score = (100000 - (time * 200 + MasterGUI.derzeitigeRunde * 8000));
         if (score <= 0) {
             score = 0;
         }

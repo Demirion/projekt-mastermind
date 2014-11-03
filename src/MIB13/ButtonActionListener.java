@@ -1,7 +1,6 @@
 package MIB13;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -155,7 +154,12 @@ public class ButtonActionListener  implements ActionListener{
                         MasterGUI.labelResultDisplay[9 - MasterGUI.derzeitigeRunde][k].setIcon(MasterGUI.pinBlack);
                         k++;
                     }
+                    if (anzSticks[0] == 4) MasterGUI.gameHelper.gameWon();
+
                     MasterGUI.derzeitigeRunde++;
+
+                    if (MasterGUI.derzeitigeRunde == GameHelper.MAXROUNDS && MasterGUI.gameHelper.gameIsRunning())
+                        MasterGUI.gameHelper.gameLost();
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Bitte erst vier Kugeln auswählen.", "Warnung", JOptionPane.PLAIN_MESSAGE);
