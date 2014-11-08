@@ -428,6 +428,10 @@ public class MasterGUI {
             MasterGUI.ballLabel[9 - i][1].setIcon(new ImageIcon(b.getImg()));
             MasterGUI.ballLabel[9 - i][2].setIcon(new ImageIcon(c.getImg()));
             MasterGUI.ballLabel[9 - i][3].setIcon(new ImageIcon(d.getImg()));
+            ButtonActionListener.gameField[i][0] = intArray[0];
+            ButtonActionListener.gameField[i][1] = intArray[1];
+            ButtonActionListener.gameField[i][2] = intArray[2];
+            ButtonActionListener.gameField[i][3] = intArray[3];
         }
         gameHelper.setGameIsRunning(true);
         Counter.timer.start();
