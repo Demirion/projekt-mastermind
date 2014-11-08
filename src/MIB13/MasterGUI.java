@@ -6,10 +6,7 @@ import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 
 public class MasterGUI {
@@ -36,16 +33,15 @@ public class MasterGUI {
     public static ImageIcon iconBlue = new ImageIcon(("./res/img/Blau.png"));
     public static ImageIcon iconWhite = new ImageIcon(("./res/img/Weiß.png"));
     public static ImageIcon iconBlack = new ImageIcon(("./res/img/Schwarz.png"));
-    public static JMenuItem menuItemTutorial;
     public static JMenuItem menuItemTipp;
     public static JMenuItem menuItemAbout;
-    public static JMenuItem menuItemOpen;
     public static JMenuItem menuItemClose;
     public static JMenuItem menuItemNewGame;
+    public static ButtonGroup buttonGroup;
     public static JMenu menuItemGameModi;
-    public static JMenuItem menuItemMultiColorOn;
-    public static JMenuItem menuItemMultiColorOff;
-    public static JMenuItem menuItemNyanMode;
+    public static JRadioButtonMenuItem menuItemMultiColorOn;
+    public static JRadioButtonMenuItem menuItemMultiColorOff;
+    public static JCheckBoxMenuItem menuItemNyanMode;
     public static JMenuBar menuBar;
     public static JMenu menuHelp;
     public static JMenu menuDatei;
@@ -87,7 +83,7 @@ public class MasterGUI {
         JFrame frame = new JFrame("MasterMind");
         backGroundLabel = new JLabel(backGroundImage);
         JPanel backGround = new JPanel();
-        JPanel controlPanel = new JPanel();
+        final JPanel controlPanel = new JPanel();
         JPanel mediaPanel = new JPanel();
         JPanel backPanel = new JPanel();
         JPanel panelFrameControl = new JPanel(new BorderLayout());
@@ -205,7 +201,7 @@ public class MasterGUI {
         ballButton[4].setIcon(iconBlue);
         ballButton[5].setIcon(iconCyan);
         ballButton[6].setIcon(iconWhite);
-        
+
         controlPanel.add(backPanel);
         ballButton[7] = new JButton(icon);
         ballButton[7].setSize(50, 50);
@@ -217,10 +213,10 @@ public class MasterGUI {
         ballButton[7].setBorderPainted(false);
         ballButton[7].addActionListener(listener);
         backPanel.add(ballButton[7]);
-        
+
         ballButton[7].setIcon(iconBlack);
-        
-        
+
+
         //Ball entfernen
         ballDeleteButton = new JButton();
         ballDeleteButton.setSize(35, 35);
@@ -271,7 +267,7 @@ public class MasterGUI {
             e1.printStackTrace();
             System.out.println("Audiodatei nicht gefunden.");
         }
-        
+
         //screenButton
         screenButton = new JButton();
         screenButton.setSize(30, 30);
@@ -293,14 +289,10 @@ public class MasterGUI {
         JMenu menuOption = new JMenu("Optionen");
 
         //Datei
-        menuItemOpen = new JMenuItem("Öffnen");
-        menuItemOpen.addActionListener(menuListener);
         menuItemClose = new JMenuItem("Beenden");
         menuItemClose.addActionListener(menuListener);
 
         //Hilfe
-        menuItemTutorial = new JMenuItem("Anleitung");
-        menuItemTutorial.addActionListener(menuListener);
         menuItemTipp = new JMenuItem("Tipp");
         menuItemTipp.addActionListener(menuListener);
         menuItemAbout = new JMenuItem("Über");
@@ -309,9 +301,14 @@ public class MasterGUI {
         //Optionen
         menuItemNewGame = new JMenuItem("Neues Spiel");
         menuItemGameModi = new JMenu("Spielmodus");
-        menuItemMultiColorOff = new JMenuItem("Multicolor OFF");
-        menuItemMultiColorOn = new JMenuItem("Multicolor ON");
-        menuItemNyanMode = new JMenuItem("NYAN NYAN");
+        menuItemMultiColorOff = new JRadioButtonMenuItem("Multicolor OFF", true);
+        menuItemMultiColorOn = new JRadioButtonMenuItem("Multicolor ON");
+        buttonGroup = new ButtonGroup();
+        menuItemMultiColorOn.setEnabled(false);
+        menuItemMultiColorOff.setEnabled(false);
+        buttonGroup.add(menuItemMultiColorOff);
+        buttonGroup.add(menuItemMultiColorOn);
+        menuItemNyanMode = new JCheckBoxMenuItem("NYAN Mode");
         menuItemGameModi.addActionListener(menuListener);
         menuItemNewGame.addActionListener(menuListener);
         menuItemMultiColorOff.addActionListener(menuListener);
@@ -327,13 +324,11 @@ public class MasterGUI {
         menuBar.add(Box.createGlue());
         menuBar.add(menuHelp);
 
-        menuDatei.add(menuItemOpen);
+        menuDatei.add(menuItemNewGame);
         menuDatei.add(new JSeparator());
         menuDatei.add(menuItemClose);
-        menuHelp.add(menuItemTutorial);
         menuHelp.add(menuItemTipp);
         menuHelp.add(menuItemAbout);
-        menuOption.add(menuItemNewGame);
         menuOption.add(menuItemGameModi);
 
         backGroundLabel.add(menuBar);
@@ -354,11 +349,15 @@ public class MasterGUI {
 
         frame.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e) {
+                if (gameHelper.gameIsRunning()) {
+
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("gamesave"));
-                    writer.write(String.valueOf(MasterGUI.derzeitigeRunde));
+                    writer.write((String.valueOf(MasterGUI.derzeitigeRunde)));
                     writer.newLine();
                     writer.write(String.valueOf(Counter.count));
+                    writer.newLine();
+                    writer.write(Boolean.toString(gameHelper.isMultiColors()));
                     writer.newLine();
                     for(int i = 0; i < 4; i++){
                         writer.write(String.valueOf(GameHelper.mLine[i]));
@@ -377,6 +376,61 @@ public class MasterGUI {
                 }
                 System.out.println("Das Spiel wurde erfolgreich gespeichert.");
             }
+            }
         });
+    }
+
+    public void loadFromTxt() throws Exception {
+        int[] intArray = new int[4];
+        String buffer;
+        BufferedReader reader = new BufferedReader(new FileReader("gamesave"));
+        intArray[0] = Integer.valueOf(reader.readLine());
+        System.out.println("intArray " + intArray[0]);
+        derzeitigeRunde = intArray[0];
+
+        intArray[0] = Integer.valueOf(reader.readLine());
+        System.out.println("Zeit " + intArray[0]);
+        Counter.count = intArray[0];
+        Counter.time = Counter.count % 60;
+        Counter.min = Counter.count / 60;
+
+        buffer = reader.readLine();
+        System.out.println("Multicolor " + buffer);
+        gameHelper.setMultiColors(Boolean.parseBoolean(buffer));
+
+        buffer = reader.readLine();
+        intArray[0] = buffer.charAt(0) - 48;
+        intArray[1] = buffer.charAt(1) - 48;
+        intArray[2] = buffer.charAt(2) - 48;
+        intArray[3] = buffer.charAt(3) - 48;
+        System.out.println("master " + intArray[0] + " " + intArray[1] + " " + intArray[2] + " " + intArray[3]);
+
+        Ball a = new Ball(intArray[0]);
+        Ball b = new Ball(intArray[1]);
+        Ball c = new Ball(intArray[2]);
+        Ball d = new Ball(intArray[3]);
+        gameHelper.setMasterLine(new MasterLine(a, b, c, d));
+        System.out.println("Masterline: " + " " + gameHelper.getMasterLine().getBall(0).getColor() + " " + gameHelper.getMasterLine().getBall(1).getColor() + " " + gameHelper.getMasterLine().getBall(2).getColor() + " " + gameHelper.getMasterLine().getBall(3).getColor());
+
+        for (int i = 0; i < derzeitigeRunde; i++) {
+            buffer = reader.readLine();
+            intArray[0] = buffer.charAt(0) - 48;
+            intArray[1] = buffer.charAt(1) - 48;
+            intArray[2] = buffer.charAt(2) - 48;
+            intArray[3] = buffer.charAt(3) - 48;
+            System.out.println("Line: " + intArray[0] + " " + intArray[1] + " " + intArray[2] + " " + intArray[3]);
+
+            a = new Ball(intArray[0]);
+            b = new Ball(intArray[1]);
+            c = new Ball(intArray[2]);
+            d = new Ball(intArray[3]);
+            MasterGUI.ballLabel[9 - i][0].setIcon(new ImageIcon(a.getImg()));
+            MasterGUI.ballLabel[9 - i][1].setIcon(new ImageIcon(b.getImg()));
+            MasterGUI.ballLabel[9 - i][2].setIcon(new ImageIcon(c.getImg()));
+            MasterGUI.ballLabel[9 - i][3].setIcon(new ImageIcon(d.getImg()));
+        }
+        gameHelper.setGameIsRunning(true);
+        Counter.timer.start();
+
     }
 }

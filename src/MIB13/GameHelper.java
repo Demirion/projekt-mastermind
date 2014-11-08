@@ -17,6 +17,11 @@ public class GameHelper {
     public static int[] mLine = new int[LINESIZE];
     public final static int MAXROUNDS = 10;
     private boolean multiColors = false; //Option zum einstellen der Mehrfachfarbauswahl
+
+    public void setGameIsRunning(boolean gameIsRunning) {
+        this.gameIsRunning = gameIsRunning;
+    }
+
     private boolean gameIsRunning = false;
     private MasterLine masterLine;
 

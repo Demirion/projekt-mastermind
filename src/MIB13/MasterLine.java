@@ -13,6 +13,13 @@ import java.util.Vector;
 public class MasterLine extends Line {
     Random random = new Random();
 
+    public MasterLine(Ball a, Ball b, Ball c, Ball d) {
+        addBall(a);
+        addBall(b);
+        addBall(c);
+        addBall(d);
+    }
+
     public MasterLine(boolean multiColors) {
 
         if (!multiColors) {

@@ -175,8 +175,11 @@ public class ButtonActionListener  implements ActionListener{
                 auswahl = JOptionPane.showConfirmDialog(null, "Neues Spiel im Multicolor mode?\n(Zielkombination kann die gleiche Farbe mehrfach aufweisen.)", "Warnung", JOptionPane.YES_NO_OPTION);
                 if (auswahl == 0) {
                     MasterGUI.gameHelper.setMultiColors(true);
+                    //MasterGUI.buttonGroup.isSelected(MasterGUI.menuItemMultiColorOn);
+                    MasterGUI.menuItemMultiColorOn.setSelected(true);
                 } else {
                     MasterGUI.gameHelper.setMultiColors(false);
+                    MasterGUI.menuItemMultiColorOff.setSelected(true);
                 }
                 MasterGUI.repaint();
                 MasterGUI.derzeitigeRunde = 0;

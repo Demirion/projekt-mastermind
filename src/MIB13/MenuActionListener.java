@@ -11,15 +11,10 @@ import java.net.MalformedURLException;
  */
 public class MenuActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == MasterGUI.menuItemOpen) {
-
-        }
         if (e.getSource() == MasterGUI.menuItemClose) {
             System.exit(0);
         }
-        if (e.getSource() == MasterGUI.menuItemTutorial) {
 
-        }
         if (e.getSource() == MasterGUI.menuItemTipp) {
             if (MasterGUI.gameHelper.gameIsRunning()) {
                 if (MasterGUI.derzeitigeRunde != 0) {
@@ -41,7 +36,7 @@ public class MenuActionListener implements ActionListener {
 
         }
         if (e.getSource() == MasterGUI.menuItemNewGame) {
-            if (MasterGUI.gameHelper.gameIsRunning()) {
+            /*if (MasterGUI.gameHelper.gameIsRunning()) {
                 int auswahl = JOptionPane.showConfirmDialog(null, "Möchten Sie ein neues Spiel anfangen?", "Warnung", JOptionPane.YES_NO_OPTION);
                 if (auswahl == 0) {
                     MasterGUI.repaint();
@@ -51,16 +46,15 @@ public class MenuActionListener implements ActionListener {
                 }
             } else {
                 MasterGUI.gameHelper.start();
-            }
+            }*/
+            MasterGUI.newGameButton.doClick();
 
         }
         if (e.getSource() == MasterGUI.menuItemMultiColorOn) {
-            MasterGUI.gameHelper.setMultiColors(true);
-            MasterGUI.gameHelper.start();
+            //if (!MasterGUI.gameHelper.gameIsRunning())MasterGUI.gameHelper.setMultiColors(true);
         }
         if (e.getSource() == MasterGUI.menuItemMultiColorOff) {
-            MasterGUI.gameHelper.setMultiColors(false);
-            MasterGUI.gameHelper.start();
+            //MasterGUI.gameHelper.setMultiColors(false);
         }
         if (e.getSource() == MasterGUI.menuItemNyanMode) {
             if (MasterGUI.nyanMode) {

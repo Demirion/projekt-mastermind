@@ -120,10 +120,6 @@ public class TestDriverNeil {
 
         int multicheck[] = helper.checkLine(multiMaster, multiLine);
         System.out.println("Multicheck: " + multicheck[0] + " | " + multicheck[1]);
-
-
-        //Gui angucken :)
-        MasterGUI gui = new MasterGUI();
         //MasterGUI.backGroundLabel.setIcon(new ImageIcon("./res/img/nyan.gif"));
         //Dimension dim = new Dimension(430, 670);
         //MasterGUI.repaint();
@@ -134,6 +130,16 @@ public class TestDriverNeil {
 
 
         //JOptionPane.showMessageDialog(null, "Verloren", "Lutscher", JOptionPane.INFORMATION_MESSAGE, gay);
+
+
+        //Gui angucken :)
+        MasterGUI gui = new MasterGUI();
+        try {
+            System.out.println("LADEN");
+            gui.loadFromTxt();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
