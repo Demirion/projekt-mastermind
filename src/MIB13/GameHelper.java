@@ -3,6 +3,9 @@ package MIB13;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -217,5 +220,32 @@ public class GameHelper {
         }
 
         return retString;
+    }
+    public static void gameSave(){
+        if (MasterGUI.gameHelper.gameIsRunning()) {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("gamesave"));
+                writer.write((String.valueOf(MasterGUI.derzeitigeRunde)));
+                writer.newLine();
+                writer.write(String.valueOf(Counter.count));
+                writer.newLine();
+                writer.write(Boolean.toString(MasterGUI.gameHelper.isMultiColors()));
+                writer.newLine();
+                for(int i = 0; i < 4; i++){
+                    writer.write(String.valueOf(GameHelper.mLine[i]));
+                }
+                writer.newLine();
+                for(int i = 0; i <= 9; i++){
+                    for(int j = 0; j <= 3; j++){
+                        writer.write(String.valueOf(ButtonActionListener.gameField[i][j]));
+                    }
+                    writer.newLine();
+                }
+                writer.close();
+            } catch (IOException f) {
+                f.printStackTrace();
+            }
+            System.out.println("Das Spiel wurde erfolgreich gespeichert.");
+        }
     }
 }
