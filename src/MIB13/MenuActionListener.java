@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.applet.Applet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 /**
@@ -12,6 +15,31 @@ import java.net.MalformedURLException;
 public class MenuActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == MasterGUI.menuItemClose) {
+            if (MasterGUI.gameHelper.gameIsRunning()) {
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("gamesave"));
+                    writer.write((String.valueOf(MasterGUI.derzeitigeRunde)));
+                    writer.newLine();
+                    writer.write(String.valueOf(Counter.count));
+                    writer.newLine();
+                    writer.write(Boolean.toString(MasterGUI.gameHelper.isMultiColors()));
+                    writer.newLine();
+                    for(int i = 0; i < 4; i++){
+                        writer.write(String.valueOf(GameHelper.mLine[i]));
+                    }
+                    writer.newLine();
+                    for(int i = 0; i <= 9; i++){
+                        for(int j = 0; j <= 3; j++){
+                            writer.write(String.valueOf(ButtonActionListener.gameField[i][j]));
+                        }
+                        writer.newLine();
+                    }
+                    writer.close();
+                } catch (IOException f) {
+                    f.printStackTrace();
+                }
+                System.out.println("Das Spiel wurde erfolgreich gespeichert.");
+            }
             System.exit(0);
         }
 

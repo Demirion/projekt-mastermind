@@ -350,7 +350,6 @@ public class MasterGUI {
         frame.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e) {
                 if (gameHelper.gameIsRunning()) {
-
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("gamesave"));
                     writer.write((String.valueOf(MasterGUI.derzeitigeRunde)));
@@ -366,7 +365,6 @@ public class MasterGUI {
                     for(int i = 0; i <= 9; i++){
                         for(int j = 0; j <= 3; j++){
                             writer.write(String.valueOf(ButtonActionListener.gameField[i][j]));
-                            //System.out.println(ButtonActionListener.gameField[i][j]);
                         }
                         writer.newLine();
                     }
