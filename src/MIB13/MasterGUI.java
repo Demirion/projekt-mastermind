@@ -433,6 +433,8 @@ public class MasterGUI {
             ButtonActionListener.gameField[i][2] = intArray[2];
             ButtonActionListener.gameField[i][3] = intArray[3];
         }
+        del[9].setIcon(new ImageIcon("./res/img/backButtontrans.png"));
+        del[9-derzeitigeRunde].setIcon(new ImageIcon("./res/img/backButton.png"));
         gameHelper.setGameIsRunning(true);
         Counter.timer.start();
 
