@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.applet.Applet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.MalformedURLException;
 
 /**
@@ -15,7 +12,7 @@ import java.net.MalformedURLException;
 public class MenuActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == MasterGUI.menuItemClose) {
-            GameHelper.gameSave();
+            MasterGUI.gameHelper.gameSave();
             System.exit(0);
         }
 

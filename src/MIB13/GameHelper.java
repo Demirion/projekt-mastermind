@@ -16,17 +16,16 @@ import java.util.Random;
 public class GameHelper {
 
     public final static int LINESIZE = 4;
+    public final static int MAXROUNDS = 10;
     //private int sticks[] = new int[2]; //[0] = black; [1] = white;
     public static int[] mLine = new int[LINESIZE];
-    public final static int MAXROUNDS = 10;
     private boolean multiColors = false; //Option zum einstellen der Mehrfachfarbauswahl
+    private boolean gameIsRunning = false;
+    private MasterLine masterLine;
 
     public void setGameIsRunning(boolean gameIsRunning) {
         this.gameIsRunning = gameIsRunning;
     }
-
-    private boolean gameIsRunning = false;
-    private MasterLine masterLine;
 
     public boolean gameIsRunning() {
         return gameIsRunning;
@@ -221,7 +220,8 @@ public class GameHelper {
 
         return retString;
     }
-    public static void gameSave(){
+
+    public void gameSave() {
         if (MasterGUI.gameHelper.gameIsRunning()) {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter("gamesave"));
@@ -232,6 +232,7 @@ public class GameHelper {
                 writer.write(Boolean.toString(MasterGUI.gameHelper.isMultiColors()));
                 writer.newLine();
                 for(int i = 0; i < 4; i++){
+                    mLine[i] = getMasterLine().getBall(i).getColor();
                     writer.write(String.valueOf(GameHelper.mLine[i]));
                 }
                 writer.newLine();

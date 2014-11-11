@@ -6,7 +6,9 @@ import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.net.MalformedURLException;
 
 public class MasterGUI {
@@ -347,9 +349,9 @@ public class MasterGUI {
 
         gameHelper = new GameHelper();
 
-        frame.addWindowListener(new WindowAdapter(){
+        frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                GameHelper.gameSave();
+                gameHelper.gameSave();
             }
 
         });
@@ -362,6 +364,7 @@ public class MasterGUI {
         intArray[0] = Integer.valueOf(reader.readLine());
         System.out.println("intArray " + intArray[0]);
         derzeitigeRunde = intArray[0];
+        gameHelper.setGameIsRunning(true);
 
         intArray[0] = Integer.valueOf(reader.readLine());
         System.out.println("Zeit " + intArray[0]);
@@ -407,10 +410,26 @@ public class MasterGUI {
             ButtonActionListener.gameField[i][1] = intArray[1];
             ButtonActionListener.gameField[i][2] = intArray[2];
             ButtonActionListener.gameField[i][3] = intArray[3];
+            Line line = new Line(a, b, c, d);
+
+            int[] anzSticks;
+            anzSticks = gameHelper.checkLine(gameHelper.getMasterLine(), line);
+            System.out.println("anzSticks[0] = " + anzSticks[0] + " anzSticks[1] = " + anzSticks[1]);
+            int k = 0;
+            for (int j = anzSticks[1]; j > 0; j--) {
+                System.out.println("Weiß");
+                MasterGUI.labelResultDisplay[9 - i][k].setIcon(MasterGUI.pinWhite);
+                k++;
+            }
+            k = 0;
+            for (int j = anzSticks[0]; j > 0; j--) {
+                MasterGUI.labelResultDisplay[9 - i][k].setIcon(MasterGUI.pinBlack);
+                k++;
+            }
+
         }
         del[9].setIcon(new ImageIcon("./res/img/backButtontrans.png"));
         del[9-derzeitigeRunde].setIcon(new ImageIcon("./res/img/backButton.png"));
-        gameHelper.setGameIsRunning(true);
         Counter.timer.start();
 
     }
